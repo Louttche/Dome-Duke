@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scenario : MonoBehaviour
+public class Scenario
 {
-    public string ScenarioName;
+    //public string ScenarioName;
     public string text;
-    public bool choice;
+    public List<Choice> choices;
     private int countdown;
+
+    public Scenario(/*string name, */string text)
+    {
+
+    }
 
     public IEnumerator PlayScenario()
     {

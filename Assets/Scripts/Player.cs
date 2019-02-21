@@ -5,14 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public string playerName;
-    public int score = 0, happiness = 0, money = 0;
-    private Skill skill;
-
-    private void Start()
-    {
-        //get name
-        //get skill
-    }
+    public int reputation, money;
+    public float score;
+    public Skill skill;
 
     public void DisplayStats() //Show player's stats
     {
@@ -21,21 +16,33 @@ public class Player : MonoBehaviour
 
     public void IncMoney(int amount)
     {
-        this.money += amount;
+        if (skill == Skill.MoneyMan)
+            this.money += (amount + 10);
+        else
+            this.money += amount;
     }
 
     public void DecMoney(int amount)
     {
-        this.money -= amount;
+        if (skill == Skill.MoneyMan)
+            this.money -= (amount - 5);
+        else
+            this.money -= amount;
     }
 
-    public void IncHappiness(int amount)
+    public void IncReputation(int amount)
     {
-        this.happiness += amount;
+        if (skill == Skill.SweetTalker)
+            this.reputation += (amount + 10);
+        else
+            this.reputation += amount;
     }
 
-    public void DecHappiness(int amount)
+    public void DecReputation(int amount)
     {
-        this.happiness -= amount;
+        if (skill == Skill.SweetTalker)
+            this.reputation -= (amount - 10);
+        else
+            this.reputation -= amount;
     }
 }

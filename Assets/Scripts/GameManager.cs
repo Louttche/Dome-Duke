@@ -1,23 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public int totalScore = 0;
-    public string playerTurn;
+    public Button A, B;
+
+    //public string playerTurn;
+    public GameObject TotalScoreUI;
+    public GameObject player1, player2;
+    public Player p1, p2;
+
+    //Temporary text file stuff
+    public TextAsset TextFile;
+    protected FileInfo theSourceFile = null;
+    protected StreamReader reader = null;
+
     public List<Scenario> scenarios;
-    public Player player1, player2;
 
     private void Start()
     {
-        //LoadScenarios() (from text file probs)
-        player1 = new Player();
-        player1.playerName = "Tom";
-        player2 = new Player();
-        player2.playerName = "Bob";
+        LoadScenarios();
 
-        playerTurn = player1.playerName; //set player 1 to start first
+        //Get player script component to easily change their values
+        p1 = player1.GetComponent<Player>();
+        p2 = player2.GetComponent<Player>();
+    }
+
+    private void FixedUpdate()
+    {
+        //Update values
+        TotalScoreUI.GetComponent<Slider>().value = p2.score - p1.score;
+    }
+
+    protected void LoadScenarios()
+    {
+        theSourceFile = new FileInfo("Assets/Resources/" + TextFile.name + ".txt");
+        reader = theSourceFile.OpenText();
+
+        string line;
+        
     }
 
     public void GameOver()
@@ -27,15 +51,16 @@ public class GameManager : MonoBehaviour
 
     public void EndTurn()
     {
+        Debug.Log("A chosen.");
         //Check if it's gameover
         //if not switch sides
     }
 
     private void SwitchTurns()
-    {
+    {/*
         if (playerTurn.Equals(player1.playerName))
             playerTurn = player2.playerName;
         else
-            playerTurn = player1.playerName;
+            playerTurn = player1.playerName;*/
     }
 }

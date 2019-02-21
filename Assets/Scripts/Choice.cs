@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DayState
+public class Choice
 {
-    Morning,
-    Afternoon,
-    Evening,
-    EndOfDay
+    string text;
+    int Mcost, Rcost;
+
 }
