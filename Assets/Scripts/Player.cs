@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
-    public string playerName;
-    public int reputation, money;
+{    
+    public int energy, money;
     public float score;
     public Skill skill;
+    public List<Option> chosenOptions;
 
-    public void DisplayStats() //Show player's stats
-    {
-        //Use UI
+    public void AddOption(Option option){
+        chosenOptions.Add(option);
     }
-
     public void IncMoney(int amount)
     {
         if (skill == Skill.MoneyMan)
@@ -30,19 +29,19 @@ public class Player : MonoBehaviour
             this.money -= amount;
     }
 
-    public void IncReputation(int amount)
+    public void IncEnergy(int amount)
     {
         if (skill == Skill.SweetTalker)
-            this.reputation += (amount + 10);
+            this.energy += (amount + 10);
         else
-            this.reputation += amount;
+            this.energy += amount;
     }
-
-    public void DecReputation(int amount)
+ 
+    public void DecEnergy(int amount)
     {
         if (skill == Skill.SweetTalker)
-            this.reputation -= (amount - 10);
+            this.energy -= (amount - 10);
         else
-            this.reputation -= amount;
+            this.energy -= amount;
     }
 }
