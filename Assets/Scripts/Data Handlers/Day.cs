@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Skill
+[System.Serializable]
+public class Day
 {
-    MoneyMan,
-    DeepSleeper
+    public List<Scenario> scenarios;
 }

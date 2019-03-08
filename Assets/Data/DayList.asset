@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f46ec1ca5ead64caae4baba180a649, type: 3}
+  m_Name: DayList
+  m_EditorClassIdentifier: 
+  days:
+  - scenarios:
+    - Title: Spy
+      p1_situation:
+        question: Send a spy to player 2?
+        options:
+        - text: Sure
+          dilemma: 1
+        - text: No!
+          dilemma: 0
+        cc_Result: You gained respect among your people for not using sleazy ways!
+        cd_Result: The people are disappointed in you for not sending a spy
+        dc_Result: P2 fell for the spy! You managed to steal some gold and the people
+          are proud
+        dd_Result: Oh no, they realized it was a spy and they chopped his head off!
+          Let's just say the people are disappointed
+      p2_situation:
+        question: A funny-looking cat says his name is Prust from a far land looking
+          to work for you and entertain the people.
+        options:
+        - text: Sure! What could go wrong
+          dilemma: 0
+        - text: Hell no! I don't trust no funny-looking cat!
+          dilemma: 1
+        cc_Result: The funny-looking cat seems to do a good job at entertaining the
+          people.
+        cd_Result: The funny-looking cat was a spy! You manage to cut off his head
+          before he escapes
+        dc_Result: The funny-looking cat was a spy! They manage to steal some gold
+          and run away!
+        dd_Result: The people are angry with you for taking their entertainment away!
+    - Title: Milk
+      p1_situation:
+        question: Go to the store to get some milk?
+        options:
+        - text: Yes! I can't live without it
+          dilemma: 0
+        - text: Naptime!
+          dilemma: 1
+        cc_Result: You and P2 ran into a stray cat outside the store and gave it some
+          milk. The other cats notice both of your good wills.
+        cd_Result: You ran into a stray cat outside the store asking for milk but
+          you ignored him. The other cats saw your poor action.
+        dc_Result: You gained some energy and treated your staff well. Word gets out
+          of how wonderful you are!
+        dd_Result: You appear like a sloth to the people... but you got some energy!
+      p2_situation:
+        question: Need milk?
+        options:
+        - text: MILK!
+          dilemma: 0
+        - text: naptime calls!
+          dilemma: 1
+        cc_Result: You and P1 ran into a stray cat outside the store and gave it some
+          milk. The other cats notice both of your good wills.
+        cd_Result: You gained some energy and treated your staff well. Word gets out
+          of how wonderful you are!
+        dc_Result: You ran into a stray cat outside the store asking for milk but
+          you ignored him. The other cats saw your poor action.
+        dd_Result: You appear like a sloth to the people... but you got some energy!
+    - Title: Spoilt Fish
+      p1_situation:
+        question: P2 is asking to borrow some fish supplies...
+        options:
+        - text: Hell no!
+          dilemma: 0
+        - text: Yeah, of course!
+          dilemma: 1
+        cc_Result: p1_cc fish
+        cd_Result: p1_cd fish
+        dc_Result: p1_dc fish
+        dd_Result: p1_dd fish
+      p2_situation:
+        question: Party time! What should we have for our guests? fish or dried cat
+          food?
+        options:
+        - text: Fish
+          dilemma: 0
+        - text: Dried Cat Food
+          dilemma: 1
+        cc_Result: p2_cc fish
+        cd_Result: p2_cd fish
+        dc_Result: p2_dc fish
+        dd_Result: p2_dd fish
+    - Title: Box
+      p1_situation:
+        question: Master plan! Send P2's people cardboard boxes they won't be able
+          to fit in!
+        options:
+        - text: Lets do it!
+          dilemma: 1
+        - text: I would never!
+          dilemma: 0
+        cc_Result: p1_cc box
+        cd_Result: p1_cd box
+        dc_Result: p1_dc box
+        dd_Result: p1_dd box
+      p2_situation:
+        question: Someone left a gift, it seems like... a BOX!
+        options:
+        - text: IF I FITS I SITS
+          dilemma: 0
+        - text: I don't have time for boxes... (you say with tears falling down your
+            face)
+          dilemma: 1
+        cc_Result: p2_cc box
+        cd_Result: p2_cd box
+        dc_Result: p2_dc box
+        dd_Result: p2_dd box
+    - Title: MOUSE
+      p1_situation:
+        question: You both notice an unaware mouse in the distance...
+        options:
+        - text: Run! Let's see who's faster
+          dilemma: 0
+        - text: Push them and run!
+          dilemma: 1
+        cc_Result: p1_cc mouse
+        cd_Result: p1_cd mouse
+        dc_Result: p1_dc mouse
+        dd_Result: p1_dd mouse
+      p2_situation:
+        question: You both notice an unaware mouse in the distance...
+        options:
+        - text: Run! I bet I'm faster anyway
+          dilemma: 0
+        - text: Trip them over and run!
+          dilemma: 1
+        cc_Result: p2_cc mouse
+        cd_Result: p2_cd mouse
+        dc_Result: p2_dc mouse
+        dd_Result: p2_dd mouse

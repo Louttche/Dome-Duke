@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scenario
+public class DayList : ScriptableObject
 {
-    string question;
-    string cooperativeOption, defectOption;
+    public List<Day> days;
 }

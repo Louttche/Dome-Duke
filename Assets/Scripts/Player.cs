@@ -10,7 +10,20 @@ public class Player : MonoBehaviour
     public Skill skill;
     public List<Option> chosenOptions;
 
-    public void AddOption(Option option){
+    void Start()
+    {        
+        if (skill == Skill.DeepSleeper)
+            this.energy = 100;
+        else
+            this.energy = 50;
+
+        if (skill == Skill.MoneyMan)
+            this.money = 100;
+        else
+            this.money = 50;
+    }
+    
+    public void AddChosenOption(Option option){
         chosenOptions.Add(option);
     }
     public void IncMoney(int amount)
@@ -31,7 +44,7 @@ public class Player : MonoBehaviour
 
     public void IncEnergy(int amount)
     {
-        if (skill == Skill.SweetTalker)
+        if (skill == Skill.DeepSleeper)
             this.energy += (amount + 10);
         else
             this.energy += amount;
@@ -39,7 +52,7 @@ public class Player : MonoBehaviour
  
     public void DecEnergy(int amount)
     {
-        if (skill == Skill.SweetTalker)
+        if (skill == Skill.DeepSleeper)
             this.energy -= (amount - 10);
         else
             this.energy -= amount;

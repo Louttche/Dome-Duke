@@ -1,0 +1,31 @@
+Scenario 1
+Player 1 Question 1
+Player 1 Coop 1
+Player 1 Def 1
+Player 2 Question 1
+Player 2 Coop 1
+Player 2 Def 1;Scenario 2
+Player 1 Question 2
+Player 1 Coop 2
+Player 1 Def 2
+Player 2 Question 2
+Player 2 Coop 2
+Player 2 Def 2;Scenario 3
+Player 1 Question 3
+Player 1 Coop 3
+Player 1 Def 3
+Player 2 Question 3
+Player 2 Coop 3
+Player 2 Def 3;Scenario 4
+Player 1 Question 4
+Player 1 Coop 4
+Player 1 Def 4
+Player 2 Question 4
+Player 2 Coop 4
+Player 2 Def 4;Scenario 5
+Player 1 Question 5
+Player 1 Coop 5
+Player 1 Def 5
+Player 2 Question 5
+Player 2 Coop 5
+Player 2 Def 5

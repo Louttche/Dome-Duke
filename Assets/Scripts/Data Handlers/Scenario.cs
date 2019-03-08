@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ScenarioObjectList
+public class Scenario
 {
-    public List<Scenario> p1_scenarioList;
+    public string Title;
+    public Situation p1_situation, p2_situation;
 }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710047368261748225}
-  - component: {fileID: 707490446263010456}
   - component: {fileID: 5710047368261748231}
   - component: {fileID: 5710047368261748230}
   m_Layer: 5
@@ -40,24 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2, y: 4.9319305}
   m_SizeDelta: {x: 77.29999, y: -88.97101}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &707490446263010456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5710047368261748224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb60b4657cad504086153f9704829fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  option1_btn: {fileID: 5710047369668142656}
-  option2_btn: {fileID: 5710047368353872990}
-  option1_script: {fileID: 0}
-  option2_script: {fileID: 0}
-  option1_txt: {fileID: 5710047369420738582}
-  option2_txt: {fileID: 5710047368509707781}
 --- !u!222 &5710047368261748231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -104,13 +85,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710047368353872985}
-  - component: {fileID: 9177988173849855064}
   - component: {fileID: 5710047368353872988}
   - component: {fileID: 5710047368353872991}
   - component: {fileID: 5710047368353872990}
   m_Layer: 5
   m_Name: Option_2
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,20 +115,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 3.5}
   m_SizeDelta: {x: -13.700001, y: -23.599998}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9177988173849855064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5710047368353872984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53bb2830664a284c860c433b7cbec90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: 
-  dilemma: 0
 --- !u!222 &5710047368353872988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -613,13 +579,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710047369668142659}
-  - component: {fileID: 468487387555992824}
   - component: {fileID: 5710047369668142662}
   - component: {fileID: 5710047369668142657}
   - component: {fileID: 5710047369668142656}
   m_Layer: 5
   m_Name: Option_1
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -644,20 +609,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.5, y: 3}
   m_SizeDelta: {x: -13.700001, y: -23.599998}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &468487387555992824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5710047369668142658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53bb2830664a284c860c433b7cbec90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: 
-  dilemma: 0
 --- !u!222 &5710047369668142662
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -746,7 +697,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710047369934407967}
-  - component: {fileID: 687910608460718818}
   - component: {fileID: 5710047369934407965}
   - component: {fileID: 5710047369934407964}
   m_Layer: 5
@@ -776,20 +726,6 @@ RectTransform:
   m_AnchoredPosition: {x: -9.5, y: -0.6859894}
   m_SizeDelta: {x: -15.700012, y: -1.3710022}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &687910608460718818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5710047369934407966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72bd75a9ed6eaf049a2c2cdc6ed704a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questiontxt: {fileID: 5710047368457929256}
-  parentName: 
 --- !u!222 &5710047369934407965
 CanvasRenderer:
   m_ObjectHideFlags: 0
