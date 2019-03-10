@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float score;
     public Skill skill;
     public List<Option> chosenOptions;
+    public Situation mySituation;
 
     void Start()
     {        
@@ -20,7 +21,14 @@ public class Player : MonoBehaviour
         if (skill == Skill.MoneyMan)
             this.money = 100;
         else
-            this.money = 50;
+            this.money = 50;        
+    }
+
+    private void Update() {
+        if (this.name == "Player 1")
+            mySituation = GameManager.gm.p1_currentScenario.p1_situation;
+        else if (this.name == "Player 2")
+            mySituation = GameManager.gm.p2_currentScenario.p2_situation;
     }
     
     public void AddChosenOption(Option option){
@@ -56,5 +64,9 @@ public class Player : MonoBehaviour
             this.energy -= (amount - 10);
         else
             this.energy -= amount;
+    }
+
+    public string GetSituationResult(){
+        return mySituation.GetResult();
     }
 }

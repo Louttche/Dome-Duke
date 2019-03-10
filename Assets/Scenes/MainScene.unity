@@ -739,22 +739,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14f2bac3f4ef9542b733cc2494c73c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayList: {fileID: 11400000, guid: 35719ff55432d264b963767a9b12d350, type: 2}
   player1: {fileID: 488890979}
   player2: {fileID: 1289129016}
   p1_script: {fileID: 0}
   p2_script: {fileID: 0}
-  currentScenario:
+  currentDay: 1
+  currentDayScenarios: []
+  p1_currentScenario:
     Title: 
     p1_situation:
       question: 
       options: []
+      cc_Result: 
+      cd_Result: 
+      dc_Result: 
+      dd_Result: 
     p2_situation:
       question: 
       options: []
-    cc_Result: 
-    cd_Result: 
-    dc_Result: 
-    dd_Result: 
+      cc_Result: 
+      cd_Result: 
+      dc_Result: 
+      dd_Result: 
+  p2_currentScenario:
+    Title: 
+    p1_situation:
+      question: 
+      options: []
+      cc_Result: 
+      cd_Result: 
+      dc_Result: 
+      dd_Result: 
+    p2_situation:
+      question: 
+      options: []
+      cc_Result: 
+      cd_Result: 
+      dc_Result: 
+      dd_Result: 
+  p1_usedScenarios: []
+  p2_usedScenarios: []
 --- !u!4 &544072731
 Transform:
   m_ObjectHideFlags: 0
@@ -861,51 +886,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1833464864}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1310380721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1310380722}
-  - component: {fileID: 1310380723}
-  m_Layer: 0
-  m_Name: DayManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1310380722
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310380721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1837298560}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1310380723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310380721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b2df741cbb0514f8e09684bb418a4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayList: {fileID: 11400000, guid: 35719ff55432d264b963767a9b12d350, type: 2}
-  currentDay: 1
 --- !u!1 &1369264153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5710047368457929258, guid: 56961112f08cc414ca17b266e873fbf3,
@@ -1032,7 +1012,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1837298560}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1596127843
 MonoBehaviour:
@@ -1052,7 +1032,8 @@ MonoBehaviour:
   p1_option2_btn: {fileID: 1086264154}
   p2_option1_btn: {fileID: 1924810742}
   p2_option2_btn: {fileID: 1704496197}
-  option_buttons: []
+  p1_option_buttons: []
+  p2_option_buttons: []
   p1_resultsPanel: {fileID: 1919754505}
   p2_resultsPanel: {fileID: 1923602238}
 --- !u!1 &1656609553
@@ -1482,7 +1463,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 544072731}
-  - {fileID: 1310380722}
   - {fileID: 1596127842}
   m_Father: {fileID: 0}
   m_RootOrder: 1

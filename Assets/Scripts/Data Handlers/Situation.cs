@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Situation
 {
+    [TextArea(3,5)]
     public string question;
     public List<Option> options;
 
@@ -18,9 +19,8 @@ public class Situation
                 if (p1_option.dilemma == Option.Dilemma.Cooperative){
                     if (p2_option.dilemma == Option.Dilemma.Cooperative){
                         GameManager.gm.p1_script.score += 5;
-                        //Show on UI
+                        //Show score on UI
                         GameManager.gm.p2_script.score += 5;
-                        //Show on UI
                         return cc_Result;
                     }
                     else if (p2_option.dilemma == Option.Dilemma.Defect){
