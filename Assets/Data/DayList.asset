@@ -144,3 +144,5 @@ MonoBehaviour:
         cd_Result: p2_cd mouse
         dc_Result: p2_dc mouse
         dd_Result: p2_dd mouse
+    p1_scenarioResults: []
+    p2_scenarioResults: []

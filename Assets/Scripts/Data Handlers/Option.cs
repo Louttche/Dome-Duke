@@ -15,5 +15,4 @@ public class Option
     public string text;
     //public int Mcost, Rcost;
     public Dilemma dilemma;
-    private Button option_btn;
 }

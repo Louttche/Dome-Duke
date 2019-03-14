@@ -8,8 +8,7 @@ public class Player : MonoBehaviour
     public int energy, money;
     public float score;
     public Skill skill;
-    public List<Option> chosenOptions;
-    public Situation mySituation;
+    public Dictionary<Scenario, Option> chosenOptions;
 
     void Start()
     {        
@@ -21,19 +20,19 @@ public class Player : MonoBehaviour
         if (skill == Skill.MoneyMan)
             this.money = 100;
         else
-            this.money = 50;        
+            this.money = 50;
+
+        this.chosenOptions = new Dictionary<Scenario, Option>();
     }
 
-    private void Update() {
-        if (this.name == "Player 1")
-            mySituation = GameManager.gm.p1_currentScenario.p1_situation;
-        else if (this.name == "Player 2")
-            mySituation = GameManager.gm.p2_currentScenario.p2_situation;
+    public void IncScore(float amount){
+        this.score += amount;
     }
-    
-    public void AddChosenOption(Option option){
-        chosenOptions.Add(option);
+
+    public void DecScore(float amount){
+        this.score -= amount;
     }
+
     public void IncMoney(int amount)
     {
         if (skill == Skill.MoneyMan)
@@ -66,7 +65,4 @@ public class Player : MonoBehaviour
             this.energy -= amount;
     }
 
-    public string GetSituationResult(){
-        return mySituation.GetResult();
-    }
 }

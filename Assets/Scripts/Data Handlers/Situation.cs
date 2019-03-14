@@ -11,38 +11,9 @@ public class Situation
 
     public string cc_Result, cd_Result, dc_Result, dd_Result;
 
-    public string GetResult(){
-        foreach (Option p1_option in GameManager.gm.p1_script.chosenOptions)
-        {
-            foreach (Option p2_option in GameManager.gm.p2_script.chosenOptions)
-            {
-                if (p1_option.dilemma == Option.Dilemma.Cooperative){
-                    if (p2_option.dilemma == Option.Dilemma.Cooperative){
-                        GameManager.gm.p1_script.score += 5;
-                        //Show score on UI
-                        GameManager.gm.p2_script.score += 5;
-                        return cc_Result;
-                    }
-                    else if (p2_option.dilemma == Option.Dilemma.Defect){
-                        GameManager.gm.p1_script.score -= 5;
-                        GameManager.gm.p2_script.score += 10;
-                        return cd_Result;
-                    }
-                }
-                else if (p1_option.dilemma == Option.Dilemma.Defect){
-                    if (p2_option.dilemma == Option.Dilemma.Cooperative){
-                        GameManager.gm.p1_script.score += 10;
-                        GameManager.gm.p2_script.score -= 5;
-                        return dc_Result;
-                    }
-                    else if (p2_option.dilemma == Option.Dilemma.Defect){
-                        GameManager.gm.p1_script.score -= 10;
-                        GameManager.gm.p2_script.score -= 10;
-                        return dd_Result;
-                    }
-                }
-            }
-        }
-        return null;
+    //Constructor to create a waiting state when a player is done before the other
+    public Situation(string question){
+        this.question = question;
+        this.options = new List<Option>();
     }
 }
