@@ -85,7 +85,7 @@ MonoBehaviour:
         options:
         - text: Hell no!
           dilemma: 1
-        - text: Yes!
+        - text: Sure
           dilemma: 0
         cc_Result: The party guests of P2 heard of your generosity and spread the
           news about how great you are!

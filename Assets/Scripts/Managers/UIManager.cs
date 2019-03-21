@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     
     public Slider overallScore; //both player's population difference
 
+    public Text p1_happiness, p2_happiness;
     //Questions
     public Text p1_questiontxt, p2_questiontxt;
 
@@ -47,6 +48,11 @@ public class UIManager : MonoBehaviour
                 b2.onClick.AddListener(() => GameManager.gm.Player2Clicked(b2));
             }
         }
+    }
+
+    private void Update() {
+        p1_happiness.text = GameManager.gm.p1_script.currentPopulation.ToString();
+        p2_happiness.text = GameManager.gm.p2_script.currentPopulation.ToString();
     }
 
     public void DisplayScenario(Player p, int r){
@@ -98,11 +104,13 @@ public class UIManager : MonoBehaviour
             p1_option1_btn.gameObject.SetActive(b);
             p1_option2_btn.gameObject.SetActive(b);
             p1_questiontxt.transform.parent.gameObject.SetActive(b);
+            p1_happiness.transform.parent.gameObject.SetActive(b);
         }
         else if (p == GameManager.gm.p2_script){
             p2_option1_btn.gameObject.SetActive(b);
             p2_option2_btn.gameObject.SetActive(b);
             p2_questiontxt.transform.parent.gameObject.SetActive(b);
+            p2_happiness.transform.parent.gameObject.SetActive(b);
         }
     }
     //Show results one by one (Implement 'Dialogue' Manager)

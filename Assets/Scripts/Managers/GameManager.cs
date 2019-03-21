@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*  PRISONER'S DILEMMA
     (p1,p2) | c = cooperative | d = defect
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         r1 = Random.Range(0, 2);
-        Debug.Log($"");
         r2 = Random.Range(0, 2);
         currentDayScenarios = data.days[currentDay-1].scenarios;
         if (currentDayScenarios != null){
@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
         else{
             Debug.Log("Congratulation P1 and P2! You both proved yourselves to the King and ruled the kingdom together!");
         }
+        SceneManager.LoadScene("MenuScene");
     }
 
     public Scenario GetRandomScenario(Player p){
