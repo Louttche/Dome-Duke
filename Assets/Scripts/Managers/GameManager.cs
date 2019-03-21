@@ -14,21 +14,18 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private bool tempGameOver = false;
+    private bool EndofDay = false;
     public DayList data;
     public GameObject player1, player2;
-
     [HideInInspector]
     public Player p1_script, p2_script;
-
     [HideInInspector]
     public static GameManager gm;
     [HideInInspector]
-    public int currentDay = 1;
+    public int currentDay = 1, r1, r2;
     [HideInInspector]
     public List<Scenario> currentDayScenarios;
     public Scenario p1_currentScenario, p2_currentScenario;
-
     public List<Scenario> p1_usedScenarios, p2_usedScenarios;
 
     private void Awake()
@@ -41,37 +38,37 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        currentDayScenarios = data.days[0].scenarios;
+        r1 = Random.Range(0, 2);
+        Debug.Log($"");
+        r2 = Random.Range(0, 2);
+        currentDayScenarios = data.days[currentDay-1].scenarios;
         if (currentDayScenarios != null){
             p1_currentScenario = GetRandomScenario(p1_script);
             //Debug.Log($"player 1 scenario: {p1_currentScenario.Title}");
             p2_currentScenario = GetRandomScenario(p2_script);
-        }      
+        }
     }
 
-    private void Update() {
-        //if (currentDay <= data.days.Count){
-        if (tempGameOver == false){
+    private void Update() {        
+        if (EndofDay == false){
+            //if both players are done
             if ((p1_usedScenarios.Count == currentDayScenarios.Count) && (p2_usedScenarios.Count == currentDayScenarios.Count)){ //if both are done (scenario becomes null when all have been used for the day)
                 foreach (Scenario s in currentDayScenarios)
                 {
                     s.SetScenarioResult();
                 }
+                UIManager.ui.SetOverallPopulation();
                 UIManager.ui.DisplayResultPanels();
-                tempGameOver = true;
-                //EndDay();
-            } else {
-                UIManager.ui.DisplayScenario(p1_script);
-                UIManager.ui.DisplayScenario(p2_script);
-            }
-            //DisplayScore();
-        }        
-        //else {
-            //Gameover();
-        //}
+                EndofDay = true;
+            } else { //If neither is done yet
+                UIManager.ui.DisplayScenario(p1_script, r1);
+                UIManager.ui.DisplayScenario(p2_script, r2);
+            }               
+        }
     }
 
     public void Player1Clicked(Button b){
+        r1 = Random.Range(0, 2);
         foreach (Option option in p1_currentScenario.p1_situation.options)
         {
             if (option.text == b.GetComponentInChildren<Text>().text){
@@ -79,7 +76,7 @@ public class GameManager : MonoBehaviour
                 p1_usedScenarios.Add(p1_currentScenario);
                 p1_currentScenario = GetRandomScenario(p1_script);
                 if (p1_currentScenario == null){
-                    UIManager.ui.ToggleButtons(p1_script, false);
+                    UIManager.ui.TogglePlayerUI(p1_script, false);
                     p1_currentScenario = new Scenario("Done");
                 }
             }
@@ -87,6 +84,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Player2Clicked(Button b){
+        r2 = Random.Range(0, 2);
         foreach (Option option in p2_currentScenario.p2_situation.options)
         {
             if (option.text == b.GetComponentInChildren<Text>().text){
@@ -94,7 +92,7 @@ public class GameManager : MonoBehaviour
                 p2_usedScenarios.Add(p2_currentScenario);
                 p2_currentScenario = GetRandomScenario(p2_script);
                 if (p2_currentScenario == null){
-                    UIManager.ui.ToggleButtons(p2_script, false);
+                    UIManager.ui.TogglePlayerUI(p2_script, false);
                     p2_currentScenario = new Scenario("Done");
                 }
             }
@@ -102,12 +100,37 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndDay(){
-        currentDay++;
-        currentDayScenarios = data.days[currentDay].scenarios;
-        p1_currentScenario = GetRandomScenario(p1_script);
-        p2_currentScenario = GetRandomScenario(p2_script);
+        if (currentDay <= data.days.Count){
+            p1_usedScenarios.Clear();
+            p2_usedScenarios.Clear();
+            
+            currentDay++;
+            currentDayScenarios = data.days[currentDay-1].scenarios;
+            if (currentDayScenarios != null){
+                p1_currentScenario = GetRandomScenario(p1_script);
+                p2_currentScenario = GetRandomScenario(p2_script);
+            }
+            Debug.Log($"Changed to day {currentDay}");
+            UIManager.ui.TogglePlayerUI(p1_script, true);
+            UIManager.ui.TogglePlayerUI(p2_script, true);
+            
+            EndofDay = false;
+        }
+        else{
+            Gameover();
+        }
     }
     
+    private void Gameover(){
+        if (p1_script.currentPopulation > p2_script.currentPopulation){
+            Debug.Log("Congratulation P1! You proved yourself to your Father and became the next King!");
+        } else if (p1_script.currentPopulation < p2_script.currentPopulation)
+            Debug.Log("Congratulation P2! You proved yourself to your Father and became the next King!");
+        else{
+            Debug.Log("Congratulation P1 and P2! You both proved yourselves to the King and ruled the kingdom together!");
+        }
+    }
+
     public Scenario GetRandomScenario(Player p){
 
         int r = Random.Range(0, currentDayScenarios.Count);
@@ -142,5 +165,4 @@ public class GameManager : MonoBehaviour
 
         return tempScenario;
     }
-
 }

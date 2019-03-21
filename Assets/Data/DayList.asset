@@ -32,9 +32,9 @@ MonoBehaviour:
         question: A funny-looking cat says his name is Prust from a far land looking
           to work for you and entertain the people.
         options:
-        - text: Sure! What could go wrong
+        - text: Sure!
           dilemma: 0
-        - text: Hell no! I don't trust no funny-looking cat!
+        - text: No
           dilemma: 1
         cc_Result: The funny-looking cat seems to do a good job at entertaining the
           people.
@@ -43,13 +43,16 @@ MonoBehaviour:
         dc_Result: The funny-looking cat was a spy! They manage to steal some gold
           and run away!
         dd_Result: The people are angry with you for taking their entertainment away!
+      p1_result: You gained respect among your people for not using sleazy ways!
+      p2_result: The funny-looking cat seems to do a good job at entertaining the
+        people.
     - Title: Milk
       p1_situation:
         question: Go to the store to get some milk?
         options:
-        - text: Yes! I can't live without it
+        - text: MUST HAVE
           dilemma: 0
-        - text: Naptime!
+        - text: Nap time!
           dilemma: 1
         cc_Result: You and P2 ran into a stray cat outside the store and gave it some
           milk. The other cats notice both of your good wills.
@@ -63,7 +66,7 @@ MonoBehaviour:
         options:
         - text: MILK!
           dilemma: 0
-        - text: naptime calls!
+        - text: must... nap...
           dilemma: 1
         cc_Result: You and P1 ran into a stray cat outside the store and gave it some
           milk. The other cats notice both of your good wills.
@@ -72,77 +75,141 @@ MonoBehaviour:
         dc_Result: You ran into a stray cat outside the store asking for milk but
           you ignored him. The other cats saw your poor action.
         dd_Result: You appear like a sloth to the people... but you got some energy!
-    - Title: Spoilt Fish
+      p1_result: You and P2 ran into a stray cat outside the store and gave it some
+        milk. The other cats notice both of your good wills.
+      p2_result: You and P1 ran into a stray cat outside the store and gave it some
+        milk. The other cats notice both of your good wills.
+    - Title: Party Fish
       p1_situation:
-        question: P2 is asking to borrow some fish supplies...
+        question: P2 is asking to borrow some fish for a party...
         options:
         - text: Hell no!
-          dilemma: 0
-        - text: Yeah, of course!
           dilemma: 1
-        cc_Result: p1_cc fish
-        cd_Result: p1_cd fish
-        dc_Result: p1_dc fish
-        dd_Result: p1_dd fish
+        - text: Yes!
+          dilemma: 0
+        cc_Result: The party guests of P2 heard of your generosity and spread the
+          news about how great you are!
+        cd_Result: You gave away the only fish left before next month's restock! Your
+          people are really hangry.
+        dc_Result: You instead throw your own party with fish and everyone loves you!
+        dd_Result: The party guests of P2 heard of your generosity and spread the
+          news about how cheap you are. Noone is pleased with you
       p2_situation:
-        question: Party time! What should we have for our guests? fish or dried cat
-          food?
+        question: Party time! Ask to borrow fish from p1 or just use dried cat food?
         options:
         - text: Fish
           dilemma: 0
-        - text: Dried Cat Food
+        - text: Cat Food
           dilemma: 1
-        cc_Result: p2_cc fish
-        cd_Result: p2_cd fish
-        dc_Result: p2_dc fish
-        dd_Result: p2_dd fish
-    - Title: Box
+        cc_Result: P1 gave you some fish and the party guests are pleased with you!
+        cd_Result: P1 gave you some fish anyway so your party guests now have a choice!
+          They are all super pleased with you.
+        dc_Result: P1 didn't want to give you any fish. Your party guests are disappointed
+          with your promises.
+        dd_Result: You served dried cat food at the party and the people are super
+          disappointed!
+      p1_result: You gave away the only fish left before next month's restock! Your
+        people are really hangry.
+      p2_result: P1 gave you some fish anyway so your party guests now have a choice!
+        They are all super pleased with you.
+    p1_scenarioResults: []
+    p2_scenarioResults: []
+  - scenarios:
+    - Title: Mouse
       p1_situation:
-        question: Master plan! Send P2's people cardboard boxes they won't be able
-          to fit in!
+        question: "You both notice an unaware mouse in the distance\u2026"
         options:
-        - text: Lets do it!
-          dilemma: 1
-        - text: I would never!
+        - text: Run!
           dilemma: 0
-        cc_Result: p1_cc box
-        cd_Result: p1_cd box
-        dc_Result: p1_dc box
-        dd_Result: p1_dd box
+        - text: Push P2!
+          dilemma: 1
+        cc_Result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN! You both end up sharing
+          the mouse
+        cd_Result: Oh nooo the other player pushed you and got the mouse!
+        dc_Result: You manage to push them and get the mouse for yourself. What a
+          loser they are.
+        dd_Result: You both pushed eachother into a pool of water
       p2_situation:
-        question: Someone left a gift, it seems like... a BOX!
+        question: "You both notice an unaware mouse in the distance\u2026"
         options:
-        - text: IF I FITS I SITS
+        - text: Run!
           dilemma: 0
-        - text: I don't have time for boxes... (you say with tears falling down your
-            face)
+        - text: Push P2!
           dilemma: 1
-        cc_Result: p2_cc box
-        cd_Result: p2_cd box
-        dc_Result: p2_dc box
-        dd_Result: p2_dd box
-    - Title: MOUSE
+        cc_Result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN!
+        cd_Result: You manage to push them and get the mouse for yourself. What a
+          loser they are.
+        dc_Result: Oh nooo the other player pushed you and got the mouse!
+        dd_Result: You both pushed eachother into a pool of water
+      p1_result: You both pushed eachother into a pool of water
+      p2_result: You both pushed eachother into a pool of water
+    - Title: Tower
       p1_situation:
-        question: You both notice an unaware mouse in the distance...
+        question: Your fortress looks weak compared to P2's, build a new cooler tower?
         options:
-        - text: Run! Let's see who's faster
-          dilemma: 0
-        - text: Push them and run!
+        - text: Let's BUILD!
           dilemma: 1
-        cc_Result: p1_cc mouse
-        cd_Result: p1_cd mouse
-        dc_Result: p1_dc mouse
-        dd_Result: p1_dd mouse
+        - text: Nahh
+          dilemma: 0
+        cc_Result: Neither of you built an unecessary new tower and you manage to
+          save resources for winter
+        cd_Result: P2 build a new tower and it looks way cooler than yours..
+        dc_Result: The new tower looks meowrvellous! You definitely look cooler than
+          P2 now
+        dd_Result: Your cat workers feel like they are working too much for no reason
+          building this tower... They aren't happy with you.
       p2_situation:
-        question: You both notice an unaware mouse in the distance...
+        question: You're worried your fortress looks weak compared to P2, we should
+          build a new cooler tower.
         options:
-        - text: Run! I bet I'm faster anyway
-          dilemma: 0
-        - text: Trip them over and run!
+        - text: Of course!
           dilemma: 1
-        cc_Result: p2_cc mouse
-        cd_Result: p2_cd mouse
-        dc_Result: p2_dc mouse
-        dd_Result: p2_dd mouse
+        - text: Nah, it's cool
+          dilemma: 0
+        cc_Result: Neither of you built an unecessary new tower and you manage to
+          save resources for winter
+        cd_Result: The new tower looks meowrvellous! You definitely look cooler than
+          P2 now
+        dc_Result: P1 build a new tower and it looks way cooler than yours..
+        dd_Result: Your cat workers feel like they are working too much for no reason
+          building this tower... They aren't happy with you.
+      p1_result: P2 build a new tower and it looks way cooler than yours..
+      p2_result: The new tower looks meowrvellous! You definitely look cooler than
+        P2 now
+    - Title: Fish Tax
+      p1_situation:
+        question: "You\u2019re low on money, raise taxes on fish?"
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No
+          dilemma: 1
+        cc_Result: Great team work to both raise the fish tax. Now the fish market
+          is equal!
+        cd_Result: "All the people went to player\u2019s 2 kingdom to get fish because
+          it\u2019s cheaper there."
+        dc_Result: "People came to your kingdom to get fish because it\u2019s cheaper
+          here."
+        dd_Result: Your kingdom is becoming very poor! Your people are conflicted
+          with your choices
+      p2_situation:
+        question: "You\u2019re low on money, raise taxes on fish?"
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No way!
+          dilemma: 1
+        cc_Result: Great team work to both raise the fish tax. Now the fish market
+          is equal!
+        cd_Result: "People came to your kingdom to get fish because it\u2019s cheaper
+          here."
+        dc_Result: "People went to player\u2019s 1 kingdom to get fish because it\u2019s
+          cheaper there."
+        dd_Result: Your kingdom is becoming very poor! Your people are conflicted
+          with your choices
+      p1_result: Great team work to both raise the fish tax. Now the fish market is
+        equal!
+      p2_result: Great team work to both raise the fish tax. Now the fish market is
+        equal!
     p1_scenarioResults: []
     p2_scenarioResults: []

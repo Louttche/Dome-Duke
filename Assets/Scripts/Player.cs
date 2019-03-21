@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {    
-    public int energy, money;
-    public float score;
+    //public int energy, money;
+    public float currentPopulation, initialPopulation;
     public Skill skill;
     public Dictionary<Scenario, Option> chosenOptions;
 
     void Start()
-    {        
-        if (skill == Skill.DeepSleeper)
+    {
+        /*if (skill == Skill.DeepSleeper)
             this.energy = 100;
         else
             this.energy = 50;
@@ -20,20 +20,13 @@ public class Player : MonoBehaviour
         if (skill == Skill.MoneyMan)
             this.money = 100;
         else
-            this.money = 50;
-
+            this.money = 50; */
+        this.initialPopulation = 100;
+        this.currentPopulation = initialPopulation;
         this.chosenOptions = new Dictionary<Scenario, Option>();
     }
 
-    public void IncScore(float amount){
-        this.score += amount;
-    }
-
-    public void DecScore(float amount){
-        this.score -= amount;
-    }
-
-    public void IncMoney(int amount)
+    /*public void IncMoney(int amount)
     {
         if (skill == Skill.MoneyMan)
             this.money += (amount + 10);
@@ -63,6 +56,5 @@ public class Player : MonoBehaviour
             this.energy -= (amount - 10);
         else
             this.energy -= amount;
-    }
-
+    } */
 }
