@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update() {        
+    private void Update() {
         if (EndofDay == false){
             //if both players are done
             if ((p1_usedScenarios.Count == currentDayScenarios.Count) && (p2_usedScenarios.Count == currentDayScenarios.Count)){ //if both are done (scenario becomes null when all have been used for the day)
@@ -100,11 +100,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndDay(){
+        
+        currentDay++;
+
         if (currentDay <= data.days.Count){
             p1_usedScenarios.Clear();
             p2_usedScenarios.Clear();
-            
-            currentDay++;
+        
             currentDayScenarios = data.days[currentDay-1].scenarios;
             if (currentDayScenarios != null){
                 p1_currentScenario = GetRandomScenario(p1_script);

@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     public static UIManager ui;
     
     public Slider overallScore; //both player's population difference
-    public Text p1_population, p2_population;
 
     //Questions
     public Text p1_questiontxt, p2_questiontxt;
@@ -27,8 +26,6 @@ public class UIManager : MonoBehaviour
         ui = this;
     }
     private void Start() {
-        p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
-        p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
 
         p1_option_buttons.Add(p1_option1_btn);
         p1_option_buttons.Add(p1_option2_btn);
@@ -50,11 +47,6 @@ public class UIManager : MonoBehaviour
                 b2.onClick.AddListener(() => GameManager.gm.Player2Clicked(b2));
             }
         }
-    }
-
-    private void Update() {
-        p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
-        p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
     }
 
     public void DisplayScenario(Player p, int r){
