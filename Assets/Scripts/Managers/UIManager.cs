@@ -8,26 +8,33 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager ui;
     
+    //Game status UI elements
     public Slider overallScore; //both player's population difference
-
-    public Text p1_happiness, p2_happiness;
+    public List<Sprite> scenarioBarSprites;
+    public Image p1_scenarioBar, p2_scenarioBar;
+    public Text p1_population, p2_population; 
+    public Text p1_kingdomHealth, p2_kingdomHealth;
+    
     //Questions
     public Text p1_questiontxt, p2_questiontxt;
+    public GameObject endDayPanel;
 
     //Options
     public Button p1_option1_btn, p1_option2_btn, p2_option1_btn, p2_option2_btn;
     private List<Button> p1_option_buttons = new List<Button>(), p2_option_buttons = new List<Button>();
+    
+    //Player UI
+    public GameObject p1_character, p2_character;
     private Animator p1_showresultsAnimator, p2_showresultsAnimator;
-
     public GameObject p1_resultsPanel, p2_resultsPanel;
-
     private Queue<string> p1_scenarioResults, p2_scenarioResults;
+    private bool p1_showNextResult, p2_showNextResult;
+    public bool fadeIn;
 
     private void Awake() {
         ui = this;
     }
     private void Start() {
-
         p1_option_buttons.Add(p1_option1_btn);
         p1_option_buttons.Add(p1_option2_btn);
         p2_option_buttons.Add(p2_option1_btn);
@@ -48,11 +55,69 @@ public class UIManager : MonoBehaviour
                 b2.onClick.AddListener(() => GameManager.gm.Player2Clicked(b2));
             }
         }
+
+        TogglePlayerUI(GameManager.gm.p1_script, false); //For player 1
+        TogglePlayerUI(GameManager.gm.p2_script, false); //For player 2
+    }
+
+    private IEnumerator FadeToNextDay()
+    {
+        float endDayPanelAlpha = endDayPanel.GetComponent<Image>().color.a;
+        endDayPanel.gameObject.SetActive(true);
+        //Fade in
+        while(endDayPanelAlpha < 1)
+        {
+            endDayPanelAlpha += 0.125f;
+            endDayPanel.GetComponent<Image>().color = new Color(0, 0, 0, endDayPanelAlpha);
+            yield return new WaitForSeconds(0.08f);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        foreach (Transform child in endDayPanel.transform)
+        {
+            child.GetComponent<Text>().text = "";
+        }
+
+        TogglePlayerUI(GameManager.gm.p1_script, true); //For player 1
+        TogglePlayerUI(GameManager.gm.p2_script, true); //For player 2
+
+        //Fade out
+        while(endDayPanelAlpha > 0)
+        {
+            endDayPanelAlpha -= 0.1f;
+            endDayPanel.GetComponent<Image>().color = new Color(0, 0, 0, endDayPanelAlpha);
+            yield return new WaitForSeconds(0.08f);
+        }
+
+        endDayPanel.gameObject.SetActive(false);
     }
 
     private void Update() {
-        p1_happiness.text = GameManager.gm.p1_script.currentPopulation.ToString();
-        p2_happiness.text = GameManager.gm.p2_script.currentPopulation.ToString();
+        p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
+        p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
+        
+        if (GameManager.gm.kingdomHealth >= 7){
+            p1_kingdomHealth.text = "Good";
+            p2_kingdomHealth.text = "Good";
+        } else if ((GameManager.gm.kingdomHealth < 7) && (GameManager.gm.kingdomHealth >= 4)){
+            p1_kingdomHealth.text = "Normal";
+            p2_kingdomHealth.text = "Normal";
+        } else
+        {
+            p1_kingdomHealth.text = "Danger";
+            p2_kingdomHealth.text = "Danger";
+        }
+    }
+
+    public void showDay(int day){        
+        foreach (Transform child in endDayPanel.transform)
+        {
+            child.GetComponent<Text>().text = "Day " + day;
+        }
+
+        endDayPanel.SetActive(true);
+        StartCoroutine(UIManager.ui.FadeToNextDay());
     }
 
     public void DisplayScenario(Player p, int r){
@@ -101,26 +166,26 @@ public class UIManager : MonoBehaviour
 
     public void TogglePlayerUI(Player p, bool b){
         if (p == GameManager.gm.p1_script){ // if for player 1
+            p1_population.transform.parent.gameObject.SetActive(b);
+            p1_kingdomHealth.transform.parent.transform.parent.gameObject.SetActive(b);
             p1_option1_btn.gameObject.SetActive(b);
             p1_option2_btn.gameObject.SetActive(b);
             p1_questiontxt.transform.parent.gameObject.SetActive(b);
-            p1_happiness.transform.parent.gameObject.SetActive(b);
         }
         else if (p == GameManager.gm.p2_script){
+            p2_population.transform.parent.gameObject.SetActive(b);
+            p2_kingdomHealth.transform.parent.transform.parent.gameObject.SetActive(b);
             p2_option1_btn.gameObject.SetActive(b);
             p2_option2_btn.gameObject.SetActive(b);
             p2_questiontxt.transform.parent.gameObject.SetActive(b);
-            p2_happiness.transform.parent.gameObject.SetActive(b);
         }
     }
-    //Show results one by one (Implement 'Dialogue' Manager)
 
     public void StartDialogue(Player p, List<string> results)
     {
         if (p.name == "Player 1"){
             p1_scenarioResults.Clear();
             p1_showresultsAnimator.SetBool("Show", true);
-            p1_resultsPanel.GetComponent<Button>().interactable = true;
             foreach (string result in results)
             {
                 p1_scenarioResults.Enqueue(result);
@@ -128,57 +193,66 @@ public class UIManager : MonoBehaviour
         }
         else if (p.name == "Player 2"){
             p2_scenarioResults.Clear();
-            p2_showresultsAnimator.SetBool("Show", true);
-            p2_resultsPanel.GetComponent<Button>().interactable = true;
+            p2_showresultsAnimator.SetBool("Show", true);           
             foreach (string result in results)
             {
                 p2_scenarioResults.Enqueue(result);
-            }
+            }          
         }
+        p1_showNextResult = true;
+        p2_showNextResult = true;
         DisplayNextResult(p);
     }
 
     public void DisplayNextResult(Player p)
     {
-        string result = "";
+        //string result = "";
+        /*
+            
+        */
         if (p.name == "Player 1"){
             if (p1_scenarioResults.Count == 0)
             {
                 EndDialogue(p);
                 return;
+            } else if (p1_showNextResult == true){
+                string result = "";
+                result = p1_scenarioResults.Dequeue();
+                StartCoroutine(TypeResult(p, result));
             }
-
-            result = p1_scenarioResults.Dequeue();
         } else if (p.name == "Player 2"){
             if (p2_scenarioResults.Count == 0)
             {
                 EndDialogue(p);
                 return;
+            } else if (p2_showNextResult == true){
+                string result = "";
+                result = p2_scenarioResults.Dequeue();
+                StartCoroutine(TypeResult(p, result));
             }
-
-            result = p2_scenarioResults.Dequeue();
         }
-
-        //StopCoroutine(TypeResult)
-        StartCoroutine(TypeResult(p, result));
     }
 
     IEnumerator TypeResult(Player p, string result)
     {
         if (p.name == "Player 1"){
+            p1_showNextResult = false;
             p1_resultsPanel.GetComponentInChildren<Text>().text = "";
             foreach (char letter in result.ToCharArray())
             {
                 p1_resultsPanel.GetComponentInChildren<Text>().text += letter;
                 yield return null;
             }
+            p1_showNextResult = true;
         } else if (p.name == "Player 2"){
+            p2_showNextResult = false;
             p2_resultsPanel.GetComponentInChildren<Text>().text = "";
             foreach (char letter in result.ToCharArray())
             {
                 p2_resultsPanel.GetComponentInChildren<Text>().text += letter;
                 yield return null;
             }
+            p2_showNextResult = true;
         }
     }
 
@@ -187,11 +261,9 @@ public class UIManager : MonoBehaviour
         {
             if (p.name == "Player 1"){
                 p1_showresultsAnimator.SetBool("Show", false);
-                p1_resultsPanel.GetComponent<Button>().interactable = false;
             }               
             else if (p.name == "Player 2"){
                 p2_showresultsAnimator.SetBool("Show", false);
-                p2_resultsPanel.GetComponent<Button>().interactable = false;
             }
             
             if ((p1_showresultsAnimator.GetBool("Show") == false) && (p2_showresultsAnimator.GetBool("Show") == false))
@@ -213,5 +285,20 @@ public class UIManager : MonoBehaviour
     private float Map(float value, float inMin, float inMax, float outMin, float outMax)
     {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    }
+
+    public IEnumerator CharacterSpriteChange(Player p, string spriteName){
+        Image currentImage;
+        
+        if (p == GameManager.gm.p1_script)
+            currentImage = p1_character.GetComponent<Image>();
+        else
+            currentImage = p2_character.GetComponent<Image>();
+
+        currentImage.sprite = Resources.Load<Sprite>($"Sprites/{spriteName}");
+
+        yield return new WaitForSeconds(1f);
+
+        currentImage.sprite = Resources.Load<Sprite>($"Sprites/Player");
     }
 }

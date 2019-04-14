@@ -43,9 +43,9 @@ MonoBehaviour:
         dc_Result: The funny-looking cat was a spy! They manage to steal some gold
           and run away!
         dd_Result: The people are angry with you for taking their entertainment away!
-      p1_result: You gained respect among your people for not using sleazy ways!
-      p2_result: The funny-looking cat seems to do a good job at entertaining the
-        people.
+      p1_result: The people are disappointed in you for not sending a spy
+      p2_result: The funny-looking cat was a spy! You manage to cut off his head before
+        he escapes
     - Title: Milk
       p1_situation:
         question: Go to the store to get some milk?
@@ -92,8 +92,8 @@ MonoBehaviour:
         cd_Result: You gave away the only fish left before next month's restock! Your
           people are really hangry.
         dc_Result: You instead throw your own party with fish and everyone loves you!
-        dd_Result: The party guests of P2 heard of your generosity and spread the
-          news about how cheap you are. Noone is pleased with you
+        dd_Result: The party guests of P2 heard and spread the news about how cheap
+          you are. Noone is pleased with you
       p2_situation:
         question: Party time! Ask to borrow fish from p1 or just use dried cat food?
         options:
@@ -108,10 +108,61 @@ MonoBehaviour:
           with your promises.
         dd_Result: You served dried cat food at the party and the people are super
           disappointed!
-      p1_result: You gave away the only fish left before next month's restock! Your
-        people are really hangry.
-      p2_result: P1 gave you some fish anyway so your party guests now have a choice!
-        They are all super pleased with you.
+      p1_result: You instead throw your own party with fish and everyone loves you!
+      p2_result: P1 didn't want to give you any fish. Your party guests are disappointed
+        with your promises.
+    - Title: Malakies
+      p1_situation:
+        question: Malakia 1
+        options:
+        - text: Hell no!
+          dilemma: 1
+        - text: Sure
+          dilemma: 0
+        cc_Result: malakia result 1
+        cd_Result: malakia result 2
+        dc_Result: malakia result 3
+        dd_Result: malakia result 4
+      p2_situation:
+        question: Malakia 1
+        options:
+        - text: Sure
+          dilemma: 0
+        - text: No
+          dilemma: 1
+        cc_Result: malakia result 1
+        cd_Result: malakia result 2
+        dc_Result: malakia result 3
+        dd_Result: malakia result 4
+      p1_result: You instead throw your own party with fish and everyone loves you!
+      p2_result: P1 didn't want to give you any fish. Your party guests are disappointed
+        with your promises.
+    - Title: Tower
+      p1_situation:
+        question: Tower 1
+        options:
+        - text: Hell no!
+          dilemma: 1
+        - text: Sure
+          dilemma: 0
+        cc_Result: Tower result 1
+        cd_Result: Tower result 2
+        dc_Result: Tower result 3
+        dd_Result: Tower result 4
+      p2_situation:
+        question: Tower 1
+        options:
+        - text: Fish
+          dilemma: 0
+        - text: Cat Food
+          dilemma: 1
+        cc_Result: Tower result 1
+        cd_Result: Tower result 2
+        dc_Result: Tower result 3
+        dd_Result: Tower result 4
+      p1_result: You instead throw your own party with fish and everyone loves you!
+      p2_result: P1 didn't want to give you any fish. Your party guests are disappointed
+        with your promises.
     p1_scenarioResults: []
     p2_scenarioResults: []
   - scenarios:
@@ -141,8 +192,9 @@ MonoBehaviour:
           loser they are.
         dc_Result: Oh nooo the other player pushed you and got the mouse!
         dd_Result: You both pushed eachother into a pool of water
-      p1_result: You both pushed eachother into a pool of water
-      p2_result: You both pushed eachother into a pool of water
+      p1_result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN! You both end up sharing
+        the mouse
+      p2_result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN!
     - Title: Tower
       p1_situation:
         question: Your fortress looks weak compared to P2's, build a new cooler tower?
@@ -173,9 +225,9 @@ MonoBehaviour:
         dc_Result: P1 build a new tower and it looks way cooler than yours..
         dd_Result: Your cat workers feel like they are working too much for no reason
           building this tower... They aren't happy with you.
-      p1_result: P2 build a new tower and it looks way cooler than yours..
-      p2_result: The new tower looks meowrvellous! You definitely look cooler than
+      p1_result: The new tower looks meowrvellous! You definitely look cooler than
         P2 now
+      p2_result: P1 build a new tower and it looks way cooler than yours..
     - Title: Fish Tax
       p1_situation:
         question: "You\u2019re low on money, raise taxes on fish?"
@@ -186,8 +238,8 @@ MonoBehaviour:
           dilemma: 1
         cc_Result: Great team work to both raise the fish tax. Now the fish market
           is equal!
-        cd_Result: "All the people went to player\u2019s 2 kingdom to get fish because
-          it\u2019s cheaper there."
+        cd_Result: "All the people went to P2's kingdom to get fish because it\u2019s
+          cheaper there."
         dc_Result: "People came to your kingdom to get fish because it\u2019s cheaper
           here."
         dd_Result: Your kingdom is becoming very poor! Your people are conflicted
@@ -203,13 +255,67 @@ MonoBehaviour:
           is equal!
         cd_Result: "People came to your kingdom to get fish because it\u2019s cheaper
           here."
-        dc_Result: "People went to player\u2019s 1 kingdom to get fish because it\u2019s
-          cheaper there."
+        dc_Result: "People went to P1's kingdom to get fish because it\u2019s cheaper
+          there."
         dd_Result: Your kingdom is becoming very poor! Your people are conflicted
           with your choices
-      p1_result: Great team work to both raise the fish tax. Now the fish market is
-        equal!
-      p2_result: Great team work to both raise the fish tax. Now the fish market is
-        equal!
+      p1_result: "People came to your kingdom to get fish because it\u2019s cheaper
+        here."
+      p2_result: "People went to P1's kingdom to get fish because it\u2019s cheaper
+        there."
+    - Title: Happi
+      p1_situation:
+        question: Happi 1
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No
+          dilemma: 1
+        cc_Result: Happi result 1
+        cd_Result: Happi result 2
+        dc_Result: Happi result 3
+        dd_Result: Happi result 4
+      p2_situation:
+        question: Happi 1
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No way!
+          dilemma: 1
+        cc_Result: Happi result 1
+        cd_Result: Happi result 2
+        dc_Result: Happi result 3
+        dd_Result: Happi result 4
+      p1_result: "People came to your kingdom to get fish because it\u2019s cheaper
+        here."
+      p2_result: "People went to P1's kingdom to get fish because it\u2019s cheaper
+        there."
+    - Title: Road
+      p1_situation:
+        question: Road 1
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No
+          dilemma: 1
+        cc_Result: Road result 1
+        cd_Result: Road result 2
+        dc_Result: Road result 3
+        dd_Result: Road result 4
+      p2_situation:
+        question: Road 1
+        options:
+        - text: Yes
+          dilemma: 0
+        - text: No way!
+          dilemma: 1
+        cc_Result: Road result 1
+        cd_Result: Road result 2
+        dc_Result: Road result 3
+        dd_Result: Road result 4
+      p1_result: "People came to your kingdom to get fish because it\u2019s cheaper
+        here."
+      p2_result: "People went to P1's kingdom to get fish because it\u2019s cheaper
+        there."
     p1_scenarioResults: []
     p2_scenarioResults: []
