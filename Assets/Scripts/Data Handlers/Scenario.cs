@@ -8,8 +8,6 @@ public class Scenario
 {
     public string Title;
     public Situation p1_situation, p2_situation;
-    
-    [HideInInspector]
     public string p1_result, p2_result;
 
     //Constructor to create a waiting state when a player is done before the other
@@ -30,28 +28,28 @@ public class Scenario
                             if (p2_option.Value.dilemma == Option.Dilemma.Cooperative){
                                 GameManager.gm.p1_script.currentPopulation += 5;
                                 GameManager.gm.p2_script.currentPopulation += 5;
-                                p1_result = p1_situation.cc_Result;
-                                p2_result = p2_situation.cc_Result;
+                                p1_result = p1_situation.cc_Result + "\nPopulation Increased";
+                                p2_result = p2_situation.cc_Result + "\nPopulation Increased";
                             }
                             else if (p2_option.Value.dilemma == Option.Dilemma.Defect){
                                 GameManager.gm.p1_script.currentPopulation -= 5;
                                 GameManager.gm.p2_script.currentPopulation += 10;
-                                p1_result = p1_situation.cd_Result;
-                                p2_result = p2_situation.cd_Result;
+                                p1_result = p1_situation.cd_Result + "\nPopulation Increased";
+                                p2_result = p2_situation.cd_Result + "\nPopulation Decreased";
                             }
                         }
                         else if (p1_option.Value.dilemma == Option.Dilemma.Defect){
                             if (p2_option.Value.dilemma == Option.Dilemma.Cooperative){
                                 GameManager.gm.p1_script.currentPopulation += 10;
                                 GameManager.gm.p2_script.currentPopulation -= 5;
-                                p1_result = p1_situation.dc_Result;
-                                p2_result = p2_situation.dc_Result;
+                                p1_result = p1_situation.dc_Result + "\nPopulation Decreased";
+                                p2_result = p2_situation.dc_Result + "\nPopulation Increased";
                             }
                             else if (p2_option.Value.dilemma == Option.Dilemma.Defect){
                                 GameManager.gm.p1_script.currentPopulation -= 10;
                                 GameManager.gm.p2_script.currentPopulation -= 10;
-                                p1_result = p1_situation.dd_Result;
-                                p2_result = p2_situation.dd_Result;
+                                p1_result = p1_situation.dd_Result + "\nPopulation Decreased";
+                                p2_result = p2_situation.dd_Result + "\nPopulation Decreased";
                             }
                         }
                     }

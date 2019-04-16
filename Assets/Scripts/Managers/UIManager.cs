@@ -92,7 +92,6 @@ public class UIManager : MonoBehaviour
 
         endDayPanel.gameObject.SetActive(false);
     }
-
     private void Update() {
         p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
         p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
@@ -153,14 +152,14 @@ public class UIManager : MonoBehaviour
     public void DisplayResultPanels(){
         if ((p1_showresultsAnimator != null) && (p2_showresultsAnimator != null))
         {
-            List<string> p1_results = new List<string>(), p2_results = new List<string>();
+            List<string> p1_currentDayResults = new List<string>(), p2_currentDayResults = new List<string>();
             foreach (Scenario s in GameManager.gm.currentDayScenarios)
             {
-                p1_results.Add(s.p1_result);
-                p2_results.Add(s.p2_result);
+                p1_currentDayResults.Add(s.p1_result);
+                p2_currentDayResults.Add(s.p2_result);
             }
-            StartDialogue(GameManager.gm.p1_script, p1_results);
-            StartDialogue(GameManager.gm.p2_script, p2_results);
+            StartDialogue(GameManager.gm.p1_script, p1_currentDayResults);
+            StartDialogue(GameManager.gm.p2_script, p2_currentDayResults);
         }
     }
 
@@ -206,10 +205,6 @@ public class UIManager : MonoBehaviour
 
     public void DisplayNextResult(Player p)
     {
-        //string result = "";
-        /*
-            
-        */
         if (p.name == "Player 1"){
             if (p1_scenarioResults.Count == 0)
             {
@@ -286,7 +281,6 @@ public class UIManager : MonoBehaviour
     {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
-
     public IEnumerator CharacterSpriteChange(Player p, string spriteName){
         Image currentImage;
         
