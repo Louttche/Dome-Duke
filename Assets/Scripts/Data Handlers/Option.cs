@@ -9,8 +9,8 @@ public class Option
 {
     public enum Dilemma
     {
-        Cooperative,
-        Defect
+        Cooperative = 0,
+        Defect = 1
     }
     public string text;
     //public int Mcost, Rcost;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using Newtonsoft.Json;
+using System.Linq;
 
 /*  PRISONER'S DILEMMA
     (p1,p2) | c = cooperative | d = defect
@@ -41,6 +44,13 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
+
+         // Get file from local files
+        string path = Path.Combine(Application.streamingAssetsPath, "days.json");
+        // Read the file and get the JSON
+        string json = File.ReadAllText(path);
+        data = JsonConvert.DeserializeObject<DayList>(json);
+        Debug.Log(data.days.First().scenarios[0].p1_situation.cc_Result);
         r1 = Random.Range(0, 2);
         r2 = Random.Range(0, 2);
         currentDayScenarios = data.days[currentDay-1].scenarios;

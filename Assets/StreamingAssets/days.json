@@ -1,0 +1,482 @@
+{
+    "days": [
+        {
+            "scenarios": [
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                }
+            ]
+        },
+        {
+            "scenarios": [
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                },
+                {
+                    "title": "Really fucking cool title.",
+                    "p1_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2",
+                                "cc_result": "CC Result",
+                                "cd_result": "CD Result",
+                                "dc_result": "DC Result",
+                                "dd_result": "DD Result"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result"
+                    },
+                    "p2_situation": {
+                        "question": "Really cool question?",
+                        "options": [
+                            {
+                                "dilemma": 0,
+                                "text": "option 1"
+                            },
+                            {
+                                "dilemma": 1,
+                                "text": "option 2"
+                            }
+                        ],
+                        "cc_result": "CC Result",
+                        "cd_result": "CD Result",
+                        "dc_result": "DC Result",
+                        "dd_result": "DD Result",
+                    },
+                    "p1_result": "Result 1",
+                    "p2_result": "Result 2"
+                }
+            ]
+        }
+    ]
+}
