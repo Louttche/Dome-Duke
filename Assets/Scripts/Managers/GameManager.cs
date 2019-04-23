@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using System;
 
 /*  PRISONER'S DILEMMA
     (p1,p2) | c = cooperative | d = defect
@@ -18,6 +19,19 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    public enum End
+    {
+        NA,
+        DoubleFailure,
+        DoubleWin,
+        p1Win,
+        p2Win
+    }
+    public End end = End.NA;
+    [HideInInspector]
+    public int p1_nrOfEvil = 0, p2_nrOfEvil = 0, p1_nrOfGood = 0, p2_nrOfGood = 0;
+    
+    public static int maxDayScenarios = 5;
     private static int maxKingdomHealth = 10;
     public int kingdomHealth = maxKingdomHealth;
     private bool EndofDay = false;
@@ -44,21 +58,16 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-
-         // Get file from local files
-        string path = Path.Combine(Application.streamingAssetsPath, "days.json");
+        /* -----JSON----- */
+        // Get file from local files
+        //string path = Path.Combine(Application.streamingAssetsPath, "days.json");
         // Read the file and get the JSON
-        string json = File.ReadAllText(path);
-        data = JsonConvert.DeserializeObject<DayList>(json);
-        Debug.Log(data.days.First().scenarios[0].p1_situation.cc_Result);
-        r1 = Random.Range(0, 2);
-        r2 = Random.Range(0, 2);
-        currentDayScenarios = data.days[currentDay-1].scenarios;
-        if (currentDayScenarios != null){
-            p1_currentScenario = GetRandomScenario(p1_script);
-            //Debug.Log($"player 1 scenario: {p1_currentScenario.Title}");
-            p2_currentScenario = GetRandomScenario(p2_script);
-        }
+        //string json = File.ReadAllText(path);
+        //data = JsonConvert.DeserializeObject<DayList>(json);
+
+        r1 = UnityEngine.Random.Range(0, 2);
+        r2 = UnityEngine.Random.Range(0, 2);
+        InitializeScenarios();
 
         UIManager.ui.showDay(currentDay);
     }
@@ -70,6 +79,7 @@ public class GameManager : MonoBehaviour
                 foreach (Scenario s in currentDayScenarios)
                 {
                     s.SetScenarioResult();
+                    //Debug.Log($"set result for scenario: {s.Title}");
                 }
                 UIManager.ui.SetOverallPopulation();
                 UIManager.ui.DisplayResultPanels();
@@ -77,19 +87,50 @@ public class GameManager : MonoBehaviour
             } else { //If neither is done yet
                 UIManager.ui.DisplayScenario(p1_script, r1);
                 UIManager.ui.DisplayScenario(p2_script, r2);
-            }        
+            }
+        }
+    }
+    
+    private void InitializeScenarios()
+    {
+        currentDayScenarios = GetScenariosForTheDay(maxDayScenarios);//data.days[currentDay-1].scenarios;
+        if (currentDayScenarios != null){
+            p1_currentScenario = GetRandomScenario(p1_script);
+            p2_currentScenario = GetRandomScenario(p2_script);
         }
     }
 
+    private List<Scenario> GetScenariosForTheDay(int nrOfScenarios){
+        //Gets a specific amount of random scenarios from that day
+        List<Scenario> scenarioList = data.days[currentDay-1].scenarios;
+
+        //Get only the amount needed if number of scenarios exceed the max per day
+        while(scenarioList.Count > maxDayScenarios){
+            int r = UnityEngine.Random.Range(0, scenarioList.Count);
+            Scenario scenarioToRemove = scenarioList[r];
+
+            scenarioList.Remove(scenarioToRemove);
+        }
+
+        //if (scenarioList.Count < maxDayScenarios)
+        //   return null;
+
+        return scenarioList;
+    }
+
     public void Player1Clicked(Button b){
-        r1 = Random.Range(0, 2);
+        r1 = UnityEngine.Random.Range(0, 2);
         foreach (Option option in p1_currentScenario.p1_situation.options)
         {
             if (option.text == b.GetComponentInChildren<Text>().text){
-                if (option.dilemma == Option.Dilemma.Cooperative)
-                    StartCoroutine(UIManager.ui.CharacterSpriteChange(p1_script, "Angel"));
-                else
-                    StartCoroutine(UIManager.ui.CharacterSpriteChange(p1_script, "Devil"));
+                if (option.dilemma == Option.Dilemma.Cooperative){
+                    UIManager.ui.CharacterSpriteChange(p1_script, "Angel");
+                    ++p1_nrOfGood;
+                }
+                else {
+                    UIManager.ui.CharacterSpriteChange(p1_script, "Devil");
+                    ++p1_nrOfEvil;
+                }
                 p1_script.chosenOptions.Add(p1_currentScenario, option);
                 p1_usedScenarios.Add(p1_currentScenario);
                 UIManager.ui.p1_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[p1_usedScenarios.Count];
@@ -105,14 +146,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void Player2Clicked(Button b){
-        r2 = Random.Range(0, 2);
+        r2 = UnityEngine.Random.Range(0, 2);
         foreach (Option option in p2_currentScenario.p2_situation.options)
         {
             if (option.text == b.GetComponentInChildren<Text>().text){
-                if (option.dilemma == Option.Dilemma.Cooperative)
-                    StartCoroutine(UIManager.ui.CharacterSpriteChange(p2_script, "Angel"));
-                else
-                    StartCoroutine(UIManager.ui.CharacterSpriteChange(p2_script, "Devil"));
+                if (option.dilemma == Option.Dilemma.Cooperative) {
+                    UIManager.ui.CharacterSpriteChange(p2_script, "Angel");
+                    ++p2_nrOfGood;
+                }                
+                else {
+                    UIManager.ui.CharacterSpriteChange(p2_script, "Devil");
+                    ++p2_nrOfEvil;
+                }
                 p2_script.chosenOptions.Add(p2_currentScenario, option);
                 p2_usedScenarios.Add(p2_currentScenario);
                 UIManager.ui.p2_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[p2_usedScenarios.Count];
@@ -138,50 +183,52 @@ public class GameManager : MonoBehaviour
             if (kingdomHealth > 0){
                 kingdomHealth--;
             } else{
-                //Gameover();
+                DoubleFailureGameover();
             }
         }
+
     }
 
     public void EndDay(){
         if (++currentDay <= data.days.Count){
             p1_usedScenarios.Clear();
             p2_usedScenarios.Clear();
-        
-            currentDayScenarios = data.days[currentDay-1].scenarios;
-            if (currentDayScenarios != null){
-                p1_currentScenario = GetRandomScenario(p1_script);
-                p2_currentScenario = GetRandomScenario(p2_script);
-            }
+            InitializeScenarios();
             UIManager.ui.p1_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[0];
             UIManager.ui.p2_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[0];
             UIManager.ui.showDay(currentDay);
         }
-        else{
-            Gameover();
-        }
+        else
+            ClassicGameover();
 
         EndofDay = false;
     }
     
-    private void Gameover(){
-        if (kingdomHealth == 0){
-            Debug.Log("Your conflict put the entire kingdom at great risk! Your father is disappointed and neither of you becomes the next King.");
-        } else{
-            if (p1_script.currentPopulation > p2_script.currentPopulation){
-                Debug.Log("Congratulation P1! You proved yourself to your Father and became the next King!");
-            } else if (p1_script.currentPopulation < p2_script.currentPopulation)
-                Debug.Log("Congratulation P2! You proved yourself to your Father and became the next King!");
-            else{
-                Debug.Log("Congratulation P1 and P2! You both proved yourselves to the King and ruled the kingdom together!");
-            }   
-        }
-        SceneManager.LoadScene("MenuScene");
+    private void DoubleFailureGameover(){
+        //TODO: Display reason of failure
+        end = End.DoubleFailure;
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void ClassicGameover(){
+            if (p1_script.currentPopulation > p2_script.currentPopulation)
+            {
+                end = End.p1Win;
+            } 
+            else if (p1_script.currentPopulation < p2_script.currentPopulation)
+            {
+                end = End.p1Win;
+            }
+            else
+            {
+                end = End.DoubleWin;
+            }
+        SceneManager.LoadScene("GameOver");
     }
 
     public Scenario GetRandomScenario(Player p){
 
-        int r = Random.Range(0, currentDayScenarios.Count);
+        int r = UnityEngine.Random.Range(0, currentDayScenarios.Count);
         Scenario tempScenario = currentDayScenarios[r];
 
         if ((p == p1_script) && (p1_usedScenarios.Count > 0)){ //if its player 1

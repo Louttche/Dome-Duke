@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager ui;
     
     //Game status UI elements
-    public Slider overallScore; //both player's population difference
+    public Slider population; //both player's population difference
     public List<Sprite> scenarioBarSprites;
     public Image p1_scenarioBar, p2_scenarioBar;
     public Text p1_population, p2_population; 
-    public Text p1_kingdomHealth, p2_kingdomHealth;
+    public GameObject p1_kingdomHealth, p2_kingdomHealth;
     
     //Questions
     public Text p1_questiontxt, p2_questiontxt;
@@ -96,16 +97,27 @@ public class UIManager : MonoBehaviour
         p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
         p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
         
+        SetKingdomHealthUI();
+    }
+
+    private void SetKingdomHealthUI()
+    {
         if (GameManager.gm.kingdomHealth >= 7){
-            p1_kingdomHealth.text = "Good";
-            p2_kingdomHealth.text = "Good";
+            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Good";
+            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.green;
+            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Good";
+            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.green;
         } else if ((GameManager.gm.kingdomHealth < 7) && (GameManager.gm.kingdomHealth >= 4)){
-            p1_kingdomHealth.text = "Normal";
-            p2_kingdomHealth.text = "Normal";
+            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Normal";
+            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.yellow;
+            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Normal";
+            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.yellow;
         } else
         {
-            p1_kingdomHealth.text = "Danger";
-            p2_kingdomHealth.text = "Danger";
+            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Danger";
+            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.red;
+            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Danger";
+            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.red;
         }
     }
 
@@ -150,6 +162,11 @@ public class UIManager : MonoBehaviour
     }
 
     public void DisplayResultPanels(){
+        //Set the player's avatar to default
+        p1_character.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/Player");
+        p2_character.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/Player");
+        
+        //Show results
         if ((p1_showresultsAnimator != null) && (p2_showresultsAnimator != null))
         {
             List<string> p1_currentDayResults = new List<string>(), p2_currentDayResults = new List<string>();
@@ -189,17 +206,17 @@ public class UIManager : MonoBehaviour
             {
                 p1_scenarioResults.Enqueue(result);
             }
+            p1_showNextResult = true;
         }
         else if (p.name == "Player 2"){
             p2_scenarioResults.Clear();
-            p2_showresultsAnimator.SetBool("Show", true);           
+            p2_showresultsAnimator.SetBool("Show", true);          
             foreach (string result in results)
             {
                 p2_scenarioResults.Enqueue(result);
-            }          
+            }
+            p2_showNextResult = true;          
         }
-        p1_showNextResult = true;
-        p2_showNextResult = true;
         DisplayNextResult(p);
     }
 
@@ -269,30 +286,25 @@ public class UIManager : MonoBehaviour
     public void SetOverallPopulation(){
         float playerPopulationDifference = GameManager.gm.p1_script.currentPopulation - GameManager.gm.p2_script.currentPopulation;
         if (playerPopulationDifference == 0)
-            overallScore.value = 0.5f;
+            population.value = 0.5f;
         else if (playerPopulationDifference > 0){ //Player 1 has the lead
-            overallScore.value = 0.5f - UIManager.ui.Map(playerPopulationDifference, 0, GameManager.gm.p1_script.initialPopulation, 0, 1);
+            population.value = 0.5f - Map(playerPopulationDifference, 0, GameManager.gm.p1_script.initialPopulation, 0, 1);
         } else if (playerPopulationDifference < 0) //Player 2 has the lead
         {
-            overallScore.value = 0.5f + UIManager.ui.Map(Mathf.Abs(playerPopulationDifference), 0, GameManager.gm.p2_script.initialPopulation, 0, 1);
+            population.value = 0.5f + Map(Mathf.Abs(playerPopulationDifference), 0, GameManager.gm.p2_script.initialPopulation, 0, 1);
         }
     }
     private float Map(float value, float inMin, float inMax, float outMin, float outMax)
     {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
-    public IEnumerator CharacterSpriteChange(Player p, string spriteName){
+    public void CharacterSpriteChange(Player p, string spriteName){
         Image currentImage;
-        
         if (p == GameManager.gm.p1_script)
             currentImage = p1_character.GetComponent<Image>();
         else
             currentImage = p2_character.GetComponent<Image>();
 
         currentImage.sprite = Resources.Load<Sprite>($"Sprites/{spriteName}");
-
-        yield return new WaitForSeconds(1f);
-
-        currentImage.sprite = Resources.Load<Sprite>($"Sprites/Player");
     }
 }

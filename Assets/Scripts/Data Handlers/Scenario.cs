@@ -26,38 +26,39 @@ public class Scenario
         this.p2_situation = new Situation("Wait for player 1");
     }
 
+    //Prisoner's Dilemma
     public void SetScenarioResult()
     {
         // Get the options chosen by the players for this scenario.
-        var p1_option = GameManager.gm.p1_script.chosenOptions.FirstOrDefault(x => x.Key == this);
-        var p2_option = GameManager.gm.p1_script.chosenOptions.FirstOrDefault(x => x.Key == this);
+        var p1_option = GameManager.gm.p1_script.chosenOptions.FirstOrDefault(option => option.Key == this);
+        var p2_option = GameManager.gm.p2_script.chosenOptions.FirstOrDefault(option => option.Key == this);
 
         // Get a shortcut to the dilemmas for those options.
-        var p1Dilemma = p1_option.Value.dilemma;
-        var p2Dilemma = p2_option.Value.dilemma;
+        var p1_dilemma = p1_option.Value.dilemma;
+        var p2_dilemma = p2_option.Value.dilemma;
 
         //Set this scenario's results based on both player's answers
-        if (p1Dilemma == Option.Dilemma.Cooperative)
+        if (p1_dilemma == Option.Dilemma.Cooperative)
         {
-            if (p2Dilemma == Option.Dilemma.Cooperative)
+            if (p2_dilemma == Option.Dilemma.Cooperative)
             {
                 UpdatePlayerValues(1, populationIncrease, p1_situation.cc_Result);
                 UpdatePlayerValues(2, populationIncrease, p2_situation.cc_Result);
             }
-            else if (p2Dilemma == Option.Dilemma.Defect)
+            else if (p2_dilemma == Option.Dilemma.Defect)
             {
                 UpdatePlayerValues(1, populationDecrease, p1_situation.cd_Result);
                 UpdatePlayerValues(2, bigPopulationIncrease, p2_situation.cd_Result);
             }
         }
-        else if (p1Dilemma == Option.Dilemma.Defect)
+        else if (p1_dilemma == Option.Dilemma.Defect)
         {
-            if (p2Dilemma == Option.Dilemma.Cooperative)
+            if (p2_dilemma == Option.Dilemma.Cooperative)
             {
                 UpdatePlayerValues(1, bigPopulationIncrease, p1_situation.dc_Result);
                 UpdatePlayerValues(2, populationDecrease, p2_situation.dc_Result);
             }
-            else if (p2Dilemma == Option.Dilemma.Defect)
+            else if (p2_dilemma == Option.Dilemma.Defect)
             {
                 UpdatePlayerValues(1, bigPopulationDecrease, p1_situation.dd_Result);
                 UpdatePlayerValues(2, bigPopulationDecrease, p2_situation.dd_Result);
@@ -82,11 +83,11 @@ public class Scenario
 
         if (populationIncrease > 0)
         {
-            result += "\nPopulation Increased";
+            result += "\n\nPopulation Increased";
         }
         else
         {
-            result += "\nPopulation Decreased";
+            result += "\n\nPopulation Decreased";
         }
 
         switch (player)
