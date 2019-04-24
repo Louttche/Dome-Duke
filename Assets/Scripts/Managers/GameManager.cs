@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int p1_nrOfEvil = 0, p2_nrOfEvil = 0, p1_nrOfGood = 0, p2_nrOfGood = 0;
     
-    public static int maxDayScenarios = 5;
-    private static int maxKingdomHealth = 10;
-    public int kingdomHealth = maxKingdomHealth;
+    public int maxDayScenarios = 5;
+    public int maxKingdomHealth = 5;
+    public int kingdomHealth;
     [HideInInspector]
     public bool EndofDay = false;
     public DayList data;
@@ -49,10 +49,13 @@ public class GameManager : MonoBehaviour
     public Scenario p1_currentScenario, p2_currentScenario;
     public List<Scenario> p1_usedScenarios, p2_usedScenarios;
 
+    [HideInInspector]
+    public bool firstTimeWithTutorial, readyToGameOver;
+
     private void Awake()
     {
+        //firstTimeWithTutorial = false;
         gm = this;
-
         //Get player script component to easily change their values
         p1_script = player1.GetComponent<Player>();
         p2_script = player2.GetComponent<Player>();
@@ -69,18 +72,32 @@ public class GameManager : MonoBehaviour
         r1 = UnityEngine.Random.Range(0, 2);
         r2 = UnityEngine.Random.Range(0, 2);
         
-        currentDayScenarios = data.days[currentDay-1].scenarios; //GetScenariosForTheDay(maxDayScenarios); 
-        if (currentDayScenarios != null){
-            p1_currentScenario = GetRandomScenario(p1_script);
-            p2_currentScenario = GetRandomScenario(p2_script);
-        }
-        //InitializeScenarios();
+        kingdomHealth = maxKingdomHealth;
 
+        InitializeScenarios();
+
+        if (Menu.m.ShowTutorial == true){
+            firstTimeWithTutorial = true;
+            UIManager.ui.tutorialObject.SetActive(true);
+        } else
+        {
+            ShowDay();
+        }
+    }
+
+    private void ShowDay()
+    {
         UIManager.ui.showDay(currentDay);
+        UIManager.ui.p1_day.text = "Day " + GameManager.gm.currentDay;
+        UIManager.ui.p2_day.text = "Day " + GameManager.gm.currentDay;
     }
 
     private void Update() {
-        if (EndofDay == false){
+        if ((EndofDay == false) && (!Menu.m.ShowTutorial)){
+            if (firstTimeWithTutorial){
+                ShowDay();
+                firstTimeWithTutorial = false;
+            }
             //if both players are done
             if ((p1_usedScenarios.Count == currentDayScenarios.Count) && (p2_usedScenarios.Count == currentDayScenarios.Count)){
                 foreach (Scenario s in currentDayScenarios)
@@ -100,6 +117,9 @@ public class GameManager : MonoBehaviour
                 UIManager.ui.DisplayScenario(p2_script, r2);
             }
         }
+        else if (Menu.m.ShowTutorial){
+            Debug.Log("Waiting for tutorial to be done.");
+        }
     }
     
     private void InitializeScenarios()
@@ -116,15 +136,15 @@ public class GameManager : MonoBehaviour
         List<Scenario> scenarioList = data.days[currentDay-1].scenarios;
 
         //Get only the amount needed if number of scenarios exceed the max per day
-        /*while(scenarioList.Count > maxDayScenarios){
+        while(scenarioList.Count > maxDayScenarios){
             int r = UnityEngine.Random.Range(0, scenarioList.Count);
             Scenario scenarioToRemove = scenarioList[r];
 
             scenarioList.Remove(scenarioToRemove);
-        } */    
+        }
 
-        //if (scenarioList.Count < maxDayScenarios)
-        //   return null;
+        if (scenarioList.Count < maxDayScenarios)
+           return null;
         //Set the scenarios that are chosen for the day as active
         foreach (Scenario s in scenarioList)
         {
@@ -208,16 +228,12 @@ public class GameManager : MonoBehaviour
         if (++currentDay <= data.days.Count){
             p1_usedScenarios.Clear();
             p2_usedScenarios.Clear();
-            //InitializeScenarios();
-            currentDayScenarios = data.days[currentDay-1].scenarios;//GetScenariosForTheDay(maxDayScenarios);
-            if (currentDayScenarios != null){
-                p1_currentScenario = GetRandomScenario(p1_script);
-                p2_currentScenario = GetRandomScenario(p2_script);
-            }
+            InitializeScenarios();
 
             UIManager.ui.p1_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[0];
             UIManager.ui.p2_scenarioBar.sprite = UIManager.ui.scenarioBarSprites[0];
-            UIManager.ui.showDay(currentDay);
+
+            ShowDay();
         }
         else
             ClassicGameover();
@@ -232,18 +248,18 @@ public class GameManager : MonoBehaviour
     }
 
     private void ClassicGameover(){
-            if (p1_script.currentPopulation > p2_script.currentPopulation)
-            {
-                end = End.p1Win;
-            } 
-            else if (p1_script.currentPopulation < p2_script.currentPopulation)
-            {
-                end = End.p1Win;
-            }
-            else
-            {
-                end = End.DoubleWin;
-            }
+        if (p1_script.currentPopulation > p2_script.currentPopulation)
+        {
+            end = End.p1Win;
+        } 
+        else if (p1_script.currentPopulation < p2_script.currentPopulation)
+        {
+            end = End.p1Win;
+        }
+        else
+        {
+            end = End.DoubleWin;
+        }
         SceneManager.LoadScene("GameOver");
     }
 

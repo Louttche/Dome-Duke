@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager ui;
     
     //Game status UI elements
+    public GameObject tutorialObject;
     public Slider overallScore; //both player's population difference
     public List<Sprite> scenarioBarSprites;
     public Image p1_scenarioBar, p2_scenarioBar;
@@ -28,7 +30,7 @@ public class UIManager : MonoBehaviour
     public Button p1_option1_btn, p1_option2_btn, p2_option1_btn, p2_option2_btn;
     private List<Button> p1_option_buttons = new List<Button>(), p2_option_buttons = new List<Button>();
     
-    //Player UI
+    //Split UI
     public GameObject p1_character, p2_character;
     private Animator p1_showresultsAnimator, p2_showresultsAnimator;
     public GameObject p1_resultsPanel, p2_resultsPanel;
@@ -59,12 +61,9 @@ public class UIManager : MonoBehaviour
                 b2.onClick.AddListener(() => GameManager.gm.Player2Clicked(b2));
             }
         }
-
-        TogglePlayerUI(GameManager.gm.p1_script, false); //For player 1
-        TogglePlayerUI(GameManager.gm.p2_script, false); //For player 2
     }
 
-    private IEnumerator FadeToNextDay()
+    private IEnumerator Fade()
     {
         float endDayPanelAlpha = endDayPanel.GetComponent<Image>().color.a;
         endDayPanel.gameObject.SetActive(true);
@@ -85,7 +84,7 @@ public class UIManager : MonoBehaviour
 
         TogglePlayerUI(GameManager.gm.p1_script, true); //For player 1
         TogglePlayerUI(GameManager.gm.p2_script, true); //For player 2
-
+        
         //Fade out
         while(endDayPanelAlpha > 0)
         {
@@ -93,25 +92,98 @@ public class UIManager : MonoBehaviour
             endDayPanel.GetComponent<Image>().color = new Color(0, 0, 0, endDayPanelAlpha);
             yield return new WaitForSeconds(0.08f);
         }
-
         endDayPanel.gameObject.SetActive(false);
     }
 
     private void Update() {
         p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
         p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
+
+        SetKingdomHealth();
     }
 
-    public void showDay(int day){        
+    private void SetKingdomHealth()
+    {
+        //Map the current kingdom health value to the number of images are for the state of the kingdome
+        float health = Mathf.Round(Map(GameManager.gm.kingdomHealth,1,GameManager.gm.maxKingdomHealth,0,4));
+        string path = "Sprites/Kingdome Health/KingdomHealth_";
+        //switch (kingdom health in 5 (5 images for each state))
+        switch (health)
+        {
+            case 0:
+                p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}1");
+                p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}1");
+                break;
+            case 1:
+                p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}2");
+                p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}2");
+                break;
+            case 2:
+                p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}3");
+                p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}3");
+                break;
+            case 3:
+                p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}4");
+                p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}4");
+                break;
+            case 4:
+                p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}5");
+                p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}5");
+                break;  
+            default:
+                break;
+        }
+
+        /*
+        if ((GameManager.gm.kingdomHealth <= 10) && (GameManager.gm.kingdomHealth > 8))
+        {
+            //kingdome health image 4
+            p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}4");
+            p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}4");
+        } 
+        else if ((GameManager.gm.kingdomHealth <= 8) && (GameManager.gm.kingdomHealth > 6))
+        {
+            //kingdome health image 3
+            p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}3");
+            p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}3");
+        }
+        else if ((GameManager.gm.kingdomHealth <= 6) && (GameManager.gm.kingdomHealth > 4))
+        {
+            //kingdome health image 2
+            p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}2");
+            p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}2");
+        }
+        else if ((GameManager.gm.kingdomHealth <= 64) && (GameManager.gm.kingdomHealth > 2))
+        {
+            //kingdome health image 1
+            p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}1");
+            p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}1");
+        }
+        else if (GameManager.gm.kingdomHealth == 0)
+        {
+            //kingdome health image 0
+            p1_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}0");
+            p2_kingdomHealth.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{path}0");
+        } */
+    }
+
+    public void showDay(int day){     
         foreach (Transform child in endDayPanel.transform)
         {
-            child.GetComponent<Text>().text = "Day " + day;
+            if (GameManager.gm.currentDay == GameManager.gm.data.days.Count)
+                child.GetComponent<Text>().text = "Final Day";
+            else
+                child.GetComponent<Text>().text = "Day " + day;
         }
 
         endDayPanel.SetActive(true);
-        StartCoroutine(UIManager.ui.FadeToNextDay());
+        StartCoroutine(UIManager.ui.Fade());
     }
 
+    public void ResetCharacterSprites(){
+        CharacterSpriteChange(GameManager.gm.p1_script, "Player");
+        CharacterSpriteChange(GameManager.gm.p2_script, "Fez_Cat");
+    }
     public void DisplayScenario(Player p, int r){
         if (p == GameManager.gm.p1_script){ // if for player 1
             p1_questiontxt.text = GameManager.gm.p1_currentScenario.p1_situation.question;
@@ -143,6 +215,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void DisplayResultPanels(){
+        ResetCharacterSprites();
         if ((p1_showresultsAnimator != null) && (p2_showresultsAnimator != null))
         {
             List<string> p1_results = new List<string>(), p2_results = new List<string>();
@@ -277,18 +350,13 @@ public class UIManager : MonoBehaviour
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
-    public IEnumerator CharacterSpriteChange(Player p, string spriteName){
+    public void CharacterSpriteChange(Player p, string spriteName){
         Image currentImage;
-        
         if (p == GameManager.gm.p1_script)
             currentImage = p1_character.GetComponent<Image>();
         else
             currentImage = p2_character.GetComponent<Image>();
 
-        currentImage.sprite = Resources.Load<Sprite>($"Sprites/{spriteName}");
-
-        yield return new WaitForSeconds(1f);
-
-        currentImage.sprite = Resources.Load<Sprite>($"Sprites/Player");
+        currentImage.sprite = Resources.Load<Sprite>($"Sprites/Player Character/{spriteName}");
     }
 }
