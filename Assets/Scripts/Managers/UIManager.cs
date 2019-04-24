@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager ui;
     
     //Game status UI elements
-    public Slider population; //both player's population difference
+    public Slider overallScore; //both player's population difference
     public List<Sprite> scenarioBarSprites;
     public Image p1_scenarioBar, p2_scenarioBar;
-    public Text p1_population, p2_population; 
-    public GameObject p1_kingdomHealth, p2_kingdomHealth;
-    
+
+        //General status
+        public Image p1_kingdomHealth, p2_kingdomHealth;
+        public Text p1_day, p2_day;
+
+        //Personal status
+        public Text p1_population, p2_population;
+
     //Questions
     public Text p1_questiontxt, p2_questiontxt;
     public GameObject endDayPanel;
@@ -30,7 +34,6 @@ public class UIManager : MonoBehaviour
     public GameObject p1_resultsPanel, p2_resultsPanel;
     private Queue<string> p1_scenarioResults, p2_scenarioResults;
     private bool p1_showNextResult, p2_showNextResult;
-    public bool fadeIn;
 
     private void Awake() {
         ui = this;
@@ -93,32 +96,10 @@ public class UIManager : MonoBehaviour
 
         endDayPanel.gameObject.SetActive(false);
     }
+
     private void Update() {
         p1_population.text = GameManager.gm.p1_script.currentPopulation.ToString();
         p2_population.text = GameManager.gm.p2_script.currentPopulation.ToString();
-        
-        SetKingdomHealthUI();
-    }
-
-    private void SetKingdomHealthUI()
-    {
-        if (GameManager.gm.kingdomHealth >= 7){
-            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Good";
-            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.green;
-            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Good";
-            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.green;
-        } else if ((GameManager.gm.kingdomHealth < 7) && (GameManager.gm.kingdomHealth >= 4)){
-            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Normal";
-            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.yellow;
-            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Normal";
-            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.yellow;
-        } else
-        {
-            p1_kingdomHealth.GetComponentInChildren<Text>().text = "Danger";
-            p1_kingdomHealth.GetComponentInChildren<Image>().color = Color.red;
-            p2_kingdomHealth.GetComponentInChildren<Text>().text = "Danger";
-            p2_kingdomHealth.GetComponentInChildren<Image>().color = Color.red;
-        }
     }
 
     public void showDay(int day){        
@@ -162,35 +143,31 @@ public class UIManager : MonoBehaviour
     }
 
     public void DisplayResultPanels(){
-        //Set the player's avatar to default
-        p1_character.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/Player");
-        p2_character.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/Player");
-        
-        //Show results
         if ((p1_showresultsAnimator != null) && (p2_showresultsAnimator != null))
         {
-            List<string> p1_currentDayResults = new List<string>(), p2_currentDayResults = new List<string>();
+            List<string> p1_results = new List<string>(), p2_results = new List<string>();
             foreach (Scenario s in GameManager.gm.currentDayScenarios)
             {
-                p1_currentDayResults.Add(s.p1_result);
-                p2_currentDayResults.Add(s.p2_result);
+                p1_results.Add(s.p1_result);
+                p2_results.Add(s.p2_result);
             }
-            StartDialogue(GameManager.gm.p1_script, p1_currentDayResults);
-            StartDialogue(GameManager.gm.p2_script, p2_currentDayResults);
+            StartDialogue(GameManager.gm.p1_script, p1_results);
+            StartDialogue(GameManager.gm.p2_script, p2_results);
         }
     }
 
     public void TogglePlayerUI(Player p, bool b){
+
         if (p == GameManager.gm.p1_script){ // if for player 1
-            p1_population.transform.parent.gameObject.SetActive(b);
-            p1_kingdomHealth.transform.parent.transform.parent.gameObject.SetActive(b);
+            p1_population.transform.parent.transform.parent.gameObject.SetActive(b);
+            p1_kingdomHealth.transform.parent.gameObject.SetActive(b);
             p1_option1_btn.gameObject.SetActive(b);
             p1_option2_btn.gameObject.SetActive(b);
             p1_questiontxt.transform.parent.gameObject.SetActive(b);
         }
         else if (p == GameManager.gm.p2_script){
-            p2_population.transform.parent.gameObject.SetActive(b);
-            p2_kingdomHealth.transform.parent.transform.parent.gameObject.SetActive(b);
+            p2_population.transform.parent.transform.parent.gameObject.SetActive(b);
+            p2_kingdomHealth.transform.parent.gameObject.SetActive(b);
             p2_option1_btn.gameObject.SetActive(b);
             p2_option2_btn.gameObject.SetActive(b);
             p2_questiontxt.transform.parent.gameObject.SetActive(b);
@@ -250,6 +227,7 @@ public class UIManager : MonoBehaviour
         if (p.name == "Player 1"){
             p1_showNextResult = false;
             p1_resultsPanel.GetComponentInChildren<Text>().text = "";
+
             foreach (char letter in result.ToCharArray())
             {
                 p1_resultsPanel.GetComponentInChildren<Text>().text += letter;
@@ -286,25 +264,31 @@ public class UIManager : MonoBehaviour
     public void SetOverallPopulation(){
         float playerPopulationDifference = GameManager.gm.p1_script.currentPopulation - GameManager.gm.p2_script.currentPopulation;
         if (playerPopulationDifference == 0)
-            population.value = 0.5f;
+            overallScore.value = 0.5f;
         else if (playerPopulationDifference > 0){ //Player 1 has the lead
-            population.value = 0.5f - Map(playerPopulationDifference, 0, GameManager.gm.p1_script.initialPopulation, 0, 1);
+            overallScore.value = 0.5f - UIManager.ui.Map(playerPopulationDifference, 0, GameManager.gm.p1_script.initialPopulation, 0, 1);
         } else if (playerPopulationDifference < 0) //Player 2 has the lead
         {
-            population.value = 0.5f + Map(Mathf.Abs(playerPopulationDifference), 0, GameManager.gm.p2_script.initialPopulation, 0, 1);
+            overallScore.value = 0.5f + UIManager.ui.Map(Mathf.Abs(playerPopulationDifference), 0, GameManager.gm.p2_script.initialPopulation, 0, 1);
         }
     }
     private float Map(float value, float inMin, float inMax, float outMin, float outMax)
     {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
-    public void CharacterSpriteChange(Player p, string spriteName){
+
+    public IEnumerator CharacterSpriteChange(Player p, string spriteName){
         Image currentImage;
+        
         if (p == GameManager.gm.p1_script)
             currentImage = p1_character.GetComponent<Image>();
         else
             currentImage = p2_character.GetComponent<Image>();
 
         currentImage.sprite = Resources.Load<Sprite>($"Sprites/{spriteName}");
+
+        yield return new WaitForSeconds(1f);
+
+        currentImage.sprite = Resources.Load<Sprite>($"Sprites/Player");
     }
 }
