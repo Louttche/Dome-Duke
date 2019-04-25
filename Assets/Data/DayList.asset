@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   days:
   - scenarios:
-    - active: 1
+    - active: 0
       Title: Spy
       p1_situation:
-        question: Send a spy to player 2?
+        question: Send a spy to [Player 2]?
         options:
         - text: Sure
           dilemma: 1
@@ -30,8 +30,8 @@ MonoBehaviour:
         dd_Result: Oh no, they realized it was a spy and they chopped his head off!
           Let's just say the people are disappointed
       p2_situation:
-        question: A funny-looking cat says his name is Prust from a far land looking
-          to work for you and entertain the people.
+        question: A funny-looking cat says he comes from a far land looking to work
+          for you and entertain the people.
         options:
         - text: Sure!
           dilemma: 0
@@ -44,20 +44,12 @@ MonoBehaviour:
         dc_Result: The funny-looking cat was a spy! They manage to steal some gold
           and run away!
         dd_Result: The people are angry with you for taking their entertainment away!
-      p1_result: 'P2 fell for the spy! You managed to steal some gold and the people
-        are proud
-
-
-        Population Increased'
-      p2_result: 'The funny-looking cat was a spy! They manage to steal some gold
-        and run away!
-
-
-        Population Decreased'
-    - active: 1
+      p1_result: 
+      p2_result: 
+    - active: 0
       Title: Milk
       p1_situation:
-        question: Go to the store to get some milk?
+        question: Go to the local market to get some milk?
         options:
         - text: MUST HAVE
           dilemma: 0
@@ -94,7 +86,7 @@ MonoBehaviour:
 
 
         Population Decreased'
-    - active: 1
+    - active: 0
       Title: Party Fish
       p1_situation:
         question: P2 is asking to borrow some fish for a party...
@@ -124,142 +116,147 @@ MonoBehaviour:
           with your promises.
         dd_Result: You served dried cat food at the party and the people are super
           disappointed!
-      p1_result: 'You gave away the only fish left before next month''s restock! Your
-        people are really hangry.
+      p1_result: 'The party guests of P2 heard of your generosity and spread the news
+        about how great you are!
+
+
+        Population Increased'
+      p2_result: 'P1 gave you some fish and the party guests are pleased with you!
+
+
+        Population Increased'
+    - active: 0
+      Title: Plague
+      p1_situation:
+        question: You've been infested with plagued rats! Should we try to exterminate
+          them or send them to [Player 2]?
+        options:
+        - text: KILL
+          dilemma: 0
+        - text: Send
+          dilemma: 1
+        cc_Result: You managed to exterminate all the rats! And you looked so cool
+          doing it!
+        cd_Result: You manage to kill all the rats but plagued fleas appeared from
+          [Player 2] city!
+        dc_Result: You get rid of all the rats and a lot of [Player 2]'s population
+          is either dying or evacuating to your city...
+        dd_Result: TOTAL DISASTER! You both infest eachother's population through
+          a combination of plagued rats and fleas!
+      p2_situation:
+        question: You've been infested with plagued fleas! Should we try to exterminate
+          them or send them to [Player 1]?
+        options:
+        - text: KILL
+          dilemma: 0
+        - text: Send
+          dilemma: 1
+        cc_Result: You managed to exterminate all the fleas! And you looked so cool
+          doing so!
+        cd_Result: You get rid of all the fleas and a lot of [Player 1]'s population
+          is either dying or evacuating to your city...
+        dc_Result: You manage to kill all the fleas but plagued rats appeared from
+          [Player 1]'s city!
+        dd_Result: TOTAL DISASTER! You both infest eachother's population through
+          a combination of plagued rats and fleas!
+      p1_result: 'You manage to kill all the rats but plagued fleas appeared from
+        [Player 2] city!
 
 
         Population Decreased'
-      p2_result: 'P1 gave you some fish anyway so your party guests now have a choice!
-        They are all super pleased with you.
+      p2_result: 'You get rid of all the fleas and a lot of [Player 1]''s population
+        is either dying or evacuating to your city...
 
 
         Population Increased'
-    - active: 1
-      Title: Malakies
+    - active: 0
+      Title: Watermills
       p1_situation:
-        question: Malakia 1
+        question: Let's buid watermills! Mostly for hydropower purposes...
         options:
-        - text: Hell no!
-          dilemma: 1
-        - text: Sure
+        - text: POWER
           dilemma: 0
-        cc_Result: malakia result 1
-        cd_Result: malakia result 2
-        dc_Result: malakia result 3
-        dd_Result: malakia result 4
+        - text: Nah
+          dilemma: 1
+        cc_Result: Having both cities filled with watermills, cats from nearby kingdoms
+          are moving in for the fun!
+        cd_Result: Cats from [Player 2]'s city are moving in to play with the watermills!
+        dc_Result: Cats from your city are moving to [Player 2]'s city to play with
+          the new watermills they built...
+        dd_Result: Some cats are fed up with the lack of windmills and are moving
+          to nearby kingdoms.
       p2_situation:
-        question: Malakia 1
+        question: Let's buid watermills! It will be so fun to build one!
         options:
-        - text: Sure
+        - text: FUN
           dilemma: 0
-        - text: No
+        - text: Nah
           dilemma: 1
-        cc_Result: malakia result 1
-        cd_Result: malakia result 2
-        dc_Result: malakia result 3
-        dd_Result: malakia result 4
-      p1_result: 'malakia result 1
-
-
-        Population Increased'
-      p2_result: 'malakia result 1
-
-
-        Population Increased'
-    - active: 1
-      Title: Tower
-      p1_situation:
-        question: Tower 1
-        options:
-        - text: Hell no!
-          dilemma: 1
-        - text: Sure
-          dilemma: 0
-        cc_Result: Tower result 1
-        cd_Result: Tower result 2
-        dc_Result: Tower result 3
-        dd_Result: Tower result 4
-      p2_situation:
-        question: Tower 1
-        options:
-        - text: Fish
-          dilemma: 0
-        - text: Cat Food
-          dilemma: 1
-        cc_Result: Tower result 1
-        cd_Result: Tower result 2
-        dc_Result: Tower result 3
-        dd_Result: Tower result 4
-      p1_result: 'Tower result 2
-
-
-        Population Decreased'
-      p2_result: 'Tower result 2
-
-
-        Population Increased'
+        cc_Result: Having both cities filled with watermills, cats from nearby kingdoms
+          are moving in for the fun!
+        cd_Result: Cats from your city are moving to [Player 1]'s city to play with
+          the new watermills they built...
+        dc_Result: Cats from [Player 1]'s city are moving in to play with the watermills!
+        dd_Result: Some cats are fed up with the lack of windmills and are moving
+          to nearby kingdoms.
+      p1_result: 
+      p2_result: 
     p1_scenarioResults: []
     p2_scenarioResults: []
   - scenarios:
-    - active: 0
+    - active: 1
       Title: Mouse
       p1_situation:
         question: "You both notice an unaware mouse in the distance\u2026"
         options:
         - text: Run!
           dilemma: 0
-        - text: Push P2!
+        - text: PUSH
           dilemma: 1
         cc_Result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN! You both end up sharing
           the mouse
-        cd_Result: Oh nooo the other player pushed you and got the mouse!
+        cd_Result: Oh nooo [Player 2] pushed you and got the mouse!
         dc_Result: You manage to push them and get the mouse for yourself. What a
-          loser they are.
-        dd_Result: You both pushed eachother into a pool of water
+          loser am I right?
+        dd_Result: You both pushed eachother into a pool of water!
       p2_situation:
         question: "You both notice an unaware mouse in the distance\u2026"
         options:
         - text: Run!
           dilemma: 0
-        - text: Push P2!
+        - text: PUSH
           dilemma: 1
         cc_Result: WOW SO MUCH FAST! PLAYING TOGETHER IS FUN!
         cd_Result: You manage to push them and get the mouse for yourself. What a
           loser they are.
         dc_Result: Oh nooo the other player pushed you and got the mouse!
         dd_Result: You both pushed eachother into a pool of water
-      p1_result: 'WOW SO MUCH FAST! PLAYING TOGETHER IS FUN! You both end up sharing
-        the mouse
-
-
-        Population Increased'
-      p2_result: 'WOW SO MUCH FAST! PLAYING TOGETHER IS FUN!
-
-
-        Population Increased'
-    - active: 0
+      p1_result: 
+      p2_result: 
+    - active: 1
       Title: Tower
       p1_situation:
-        question: Your fortress looks weak compared to P2's, build a new cooler tower?
+        question: Your fortress looks weak compared to [Player 2]'s, build a new cooler
+          tower?
         options:
-        - text: Let's BUILD!
+        - text: BUILD!
           dilemma: 1
-        - text: Nahh
+        - text: Nah
           dilemma: 0
         cc_Result: Neither of you built an unecessary new tower and you manage to
           save resources for winter
-        cd_Result: P2 build a new tower and it looks way cooler than yours..
+        cd_Result: '[Player 2] build a new tower and it looks way cooler than yours..'
         dc_Result: The new tower looks meowrvellous! You definitely look cooler than
-          P2 now
+          [Player 2] now
         dd_Result: Your cat workers feel like they are working too much for no reason
           building this tower... They aren't happy with you.
       p2_situation:
-        question: You're worried your fortress looks weak compared to P2, we should
-          build a new cooler tower.
+        question: You're worried your fortress looks weak compared to [Player 1],
+          we should build a new cooler tower.
         options:
-        - text: Of course!
+        - text: BUILD
           dilemma: 1
-        - text: Nah, it's cool
+        - text: Nah
           dilemma: 0
         cc_Result: Neither of you built an unecessary new tower and you manage to
           save resources for winter
@@ -268,16 +265,9 @@ MonoBehaviour:
         dc_Result: P1 build a new tower and it looks way cooler than yours..
         dd_Result: Your cat workers feel like they are working too much for no reason
           building this tower... They aren't happy with you.
-      p1_result: 'The new tower looks meowrvellous! You definitely look cooler than
-        P2 now
-
-
-        Population Increased'
-      p2_result: 'P1 build a new tower and it looks way cooler than yours..
-
-
-        Population Decreased'
-    - active: 0
+      p1_result: 
+      p2_result: 
+    - active: 1
       Title: Fish Tax
       p1_situation:
         question: "You\u2019re low on money, raise taxes on fish?"
@@ -288,100 +278,110 @@ MonoBehaviour:
           dilemma: 1
         cc_Result: Great team work to both raise the fish tax. Now the fish market
           is equal!
-        cd_Result: "All the people went to P2's kingdom to get fish because it\u2019s
+        cd_Result: "All the people went to [Player 2]'s city to get fish because it\u2019s
           cheaper there."
-        dc_Result: "People came to your kingdom to get fish because it\u2019s cheaper
+        dc_Result: "People came to your city to get fish because it\u2019s cheaper
           here."
-        dd_Result: Your kingdom is becoming very poor! Your people are conflicted
-          with your choices
+        dd_Result: Your city is becoming very poor! Your people are conflicted with
+          your choices
       p2_situation:
         question: "You\u2019re low on money, raise taxes on fish?"
         options:
         - text: Yes
           dilemma: 0
-        - text: No way!
+        - text: Nah
           dilemma: 1
         cc_Result: Great team work to both raise the fish tax. Now the fish market
           is equal!
-        cd_Result: "People came to your kingdom to get fish because it\u2019s cheaper
+        cd_Result: "People came to your city to get fish because it\u2019s cheaper
           here."
-        dc_Result: "People went to P1's kingdom to get fish because it\u2019s cheaper
-          there."
+        dc_Result: "People went to [Player 1]'s kingdom to get fish because it\u2019s
+          cheaper there."
         dd_Result: Your kingdom is becoming very poor! Your people are conflicted
           with your choices
-      p1_result: "People came to your kingdom to get fish because it\u2019s cheaper
-        here.\n\nPopulation Increased"
-      p2_result: "People went to P1's kingdom to get fish because it\u2019s cheaper
-        there.\n\nPopulation Decreased"
-    - active: 0
-      Title: Happi
+      p1_result: 
+      p2_result: 
+    - active: 1
+      Title: Deadly Bread
       p1_situation:
-        question: Happi 1
+        question: Our new crops are not ready to be harvested but we're running out
+          of grain! Should we use old stored rye?
         options:
-        - text: Yes
-          dilemma: 0
-        - text: No
+        - text: Why not
           dilemma: 1
-        cc_Result: Happi result 1
-        cd_Result: Happi result 2
-        dc_Result: Happi result 3
-        dd_Result: Happi result 4
+        - text: Bad idea
+          dilemma: 0
+        cc_Result: You cautiously decide not to use the old rye and [Player 2] surprises
+          you with newly harvested crops!
+        cd_Result: You cautiously decide not to use the old rye and cats are overdramatically
+          starving...
+        dc_Result: You use the old rye and the cats are feeling kinda funny... They
+          are running around more randomly than usual but everyone seems to be having
+          fun.
+        dd_Result: You use the old rye and the cats are going crazy! Some find themselves
+          dead in the midst of all the chaos.
       p2_situation:
-        question: Happi 1
+        question: '[Player 1] is in need of newly harvested crops! Should we help
+          them?'
         options:
-        - text: Yes
+        - text: Pfft sure
           dilemma: 0
         - text: No way!
           dilemma: 1
-        cc_Result: Happi result 1
-        cd_Result: Happi result 2
-        dc_Result: Happi result 3
-        dd_Result: Happi result 4
-      p1_result: 'Happi result 1
-
-
-        Population Increased'
-      p2_result: 'Happi result 1
-
-
-        Population Increased'
-    - active: 0
+        cc_Result: You give crops to [Player 1] and you feel the superiority fill
+          you up.
+        cd_Result: Instead of giving your crops to your sibling in need, you decide
+          to organize a crop themed festival for your people!
+        dc_Result: You decide to be a full on angel and send most of your newly harvested
+          crops to your sibling in need. All that for them to use old rye instead
+          and get themselves high.
+        dd_Result: '[Player 1]''s city lacked newly harvested crops, and now cats
+          are going crazy and dying from using old rye instead.'
+      p1_result: 
+      p2_result: 
+    - active: 1
       Title: Road
       p1_situation:
-        question: Road 1
+        question: You've been invited to the King's Castle for a family gathering.
+          That means [Player 2] might be there too.
         options:
-        - text: Yes
+        - text: Family!
           dilemma: 0
-        - text: No
+        - text: Nope
           dilemma: 1
-        cc_Result: Road result 1
-        cd_Result: Road result 2
-        dc_Result: Road result 3
-        dd_Result: Road result 4
+        cc_Result: You both show up at your father's gathering and settle some good
+          trading between your cities.
+        cd_Result: You are the only one who shows up at your father's family gathering
+          and spend most of the day listening to his complains about the kingdom.
+          You end up neglecting a lot of your duties.
+        dc_Result: You decide not to go and instead host your own party and entertain
+          your people!
+        dd_Result: You decide not to go and your father is furious! He meets you and
+          makes a scene in public... Some people view less of you.
       p2_situation:
-        question: Road 1
+        question: You've been invited to the King's Castle for a family gathering.
+          That means [Player 1] might be there too.
         options:
-        - text: Yes
+        - text: Family!
           dilemma: 0
-        - text: No way!
+        - text: Ugh
           dilemma: 1
-        cc_Result: Road result 1
-        cd_Result: Road result 2
-        dc_Result: Road result 3
-        dd_Result: Road result 4
-      p1_result: 'Road result 2
-
-
-        Population Decreased'
-      p2_result: 'Road result 2
-
-
-        Population Increased'
+        cc_Result: You both show up at your father's gathering and settle some good
+          trading between your cities.
+        cd_Result: You decide not to go and instead host your own party and entertain
+          your people!
+        dc_Result: You are the only one who shows up at your father's family gathering
+          and spend most of the day listening to his complains about the kingdom.
+          You end up neglecting a lot of your duties.
+        dd_Result: You decide not to go and your father is furious! He meets you and
+          makes a scene in public... Some people view less of you.
+      p1_result: 
+      p2_result: 
     p1_scenarioResults: []
     p2_scenarioResults: []
   - scenarios:
     - active: 0
-      Title: Mouse
+      Title: 'April Fools Day! Want to '
       p1_situation:
         question: "You both notice an unaware mouse in the distance\u2026"
         options:
